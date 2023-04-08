@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: test
+    url: "jdbc:h2:~/test"
+  jpa:
+    properties:
+      hibernate:
+        use-new-id-generator-mappings: false
+        format_sql: true
+        hbm2ddl.auto: create
+        dialect: org.hibernate.dialect.H2Dialect
+        naming:
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    open-in-view: false
+    show-sql: true
