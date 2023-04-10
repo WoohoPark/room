@@ -1,6 +1,6 @@
 package com.example.room.review.entity;
 
-import com.example.room.guest.domain.Guest;
+import com.example.room.guest.entity.Guest;
 
 import javax.persistence.*;
 import java.util.Date;

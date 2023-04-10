@@ -1,13 +1,14 @@
 package com.example.room.user.domain;
 
-import com.example.room.user.domain.SexualStatus;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
-@MappedSuperclass
+@Getter
 @SuperBuilder
+@MappedSuperclass
 @NoArgsConstructor
 public abstract class User {
 

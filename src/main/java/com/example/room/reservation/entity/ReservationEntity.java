@@ -1,6 +1,6 @@
 package com.example.room.reservation.entity;
 
-import com.example.room.guest.domain.Guest;
+import com.example.room.guest.entity.Guest;
 import com.example.room.space.entity.SpaceEntity;
 
 import javax.persistence.*;
