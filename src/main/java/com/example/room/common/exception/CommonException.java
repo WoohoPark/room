@@ -55,4 +55,17 @@ public class CommonException {
 
         return new ResponseEntity<>(errorResponse,HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorResponse> NullPointException(NullPointerException e) {
+        log.error("존재하지 않는 값!!!");
+
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .status(HttpStatus.LOCKED.value())
+                .message(ErrorCodeStatus.NO_STORE_DATA.getMessage())
+                .code(ErrorCodeStatus.NO_STORE_DATA.getStatus())
+                .build();
+
+        return new ResponseEntity<>(errorResponse,HttpStatus.BAD_REQUEST);
+    }
 }

@@ -18,7 +18,8 @@ public enum ErrorCodeStatus {
     ALREADY_SAVED_NICKNAME(409, "이미 저장된 닉네임입니다."),
 
     //500 INTERNAL SERVER ERROR
-    INTERNAL_SERVER_ERROR(500, "서비스에 에러가 발생하였습니다.");
+    INTERNAL_SERVER_ERROR(500, "서비스에 에러가 발생하였습니다."),
+    NO_STORE_DATA(500, "존재 하지 않는 값 입니다.");
 
     private final int status;
     private final String message;

@@ -18,6 +18,7 @@ public class GuestController {
     @ApiOperation("게스트 회원 가입")
     public ResponseEntity join(@RequestBody GuestDto guestDto) {
         guestService.join(guestDto);
+
         return ResponseEntity.ok().build();
     }
 
