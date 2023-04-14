@@ -4,7 +4,7 @@ import com.example.room.guest.dto.GuestDto;
 
 public interface GuestService {
 
-    void join(GuestDto guestDto);
+    GuestDto join(GuestDto guestDto);
 
-    GuestDto findGuestInfo(GuestDto guestDto);
+    GuestDto find(String name);
 }

@@ -2,20 +2,28 @@ package com.example.room.guest.dto;
 
 import com.example.room.guest.entity.Guest;
 import com.example.room.user.domain.SexualStatus;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
+@EqualsAndHashCode
 @NoArgsConstructor
 public class GuestDto {
+    private long id;
+    private int age;
+    private String name;
+    private String nickName;
+    private SexualStatus sexual;
+    private long businessNumber;
 
-    long id;
-    int age;
-    String name;
-    String nickName;
-    SexualStatus sexual;
-    long businessNumber;
+    @Builder
+    public GuestDto(int id, int age, String name, String nickName, SexualStatus sexual, long businessNumber){
+        this.id = id;
+        this.age = age;
+        this.name = name;
+        this.nickName = nickName;
+        this.sexual = sexual;
+        this.businessNumber = businessNumber;
+    }
 
     public GuestDto(Guest guest){
         this.id = guest.getId();

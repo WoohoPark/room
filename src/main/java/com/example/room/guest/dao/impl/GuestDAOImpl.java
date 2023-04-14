@@ -14,14 +14,13 @@ public class GuestDAOImpl implements GuestDAO {
     GuestRepository guestRepository;
 
     @Override
-    public void save(GuestDto guestDto) {
+    public Guest save(GuestDto guestDto) {
         Guest guest = guestDto.toEntity();
-        guestRepository.save(guest);
+        return guestRepository.save(guest);
     }
 
     @Override
-    public GuestDto findByName(String name) {
-        Guest guest = guestRepository.findByName(name);
-        return new GuestDto(guest);
+    public Guest findByName(String name) {
+        return guestRepository.findByName(name);
     }
 }
