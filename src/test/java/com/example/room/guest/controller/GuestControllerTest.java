@@ -2,26 +2,16 @@ package com.example.room.guest.controller;
 
 import com.example.room.guest.dto.GuestDto;
 import com.example.room.guest.service.GuestService;
-import com.example.room.guest.service.impl.GuestServiceImpl;
-import com.example.room.user.domain.SexualStatus;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.aspectj.lang.annotation.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import javax.swing.text.html.Option;
-
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -46,8 +36,7 @@ public class GuestControllerTest {
                 .age(23)
                 .name("T")
                 .nickName("abc")
-                .sexual(SexualStatus.FEMALE)
-                .businessNumber(12341234).build();
+                .sexual(SexualStatus.FEMALE).build();
     }
 
     @Test

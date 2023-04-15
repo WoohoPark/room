@@ -1,4 +1,4 @@
-package com.example.room.fee.domain;
+package com.example.room.common.constants;
 
 public enum PaymentStatus {
     CARD,

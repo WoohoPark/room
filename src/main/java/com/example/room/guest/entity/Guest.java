@@ -1,13 +1,14 @@
 package com.example.room.guest.entity;
 
-import com.example.room.reservation.entity.ReservationEntity;
-import com.example.room.review.entity.ReviewEntity;
-import com.example.room.user.domain.User;
+import com.example.room.reservation.entity.Reservation;
+import com.example.room.review.entity.Review;
+import com.example.room.user.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity(name = "GUEST")
@@ -24,12 +25,13 @@ public class Guest extends User {
     @Column(name = "GUEST_ID")
     private long  id;
 
-    private long businessNumber;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date birthDate;
 
     @OneToMany(mappedBy = "guest")
-    List<ReservationEntity> reservationEntities;
+    List<Reservation> reservations;
 
     @OneToMany(mappedBy = "guest")
-    List<ReviewEntity> reviewEntities;
+    List<Review> reviews;
 
 }

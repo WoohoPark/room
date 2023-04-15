@@ -1,10 +1,13 @@
-package com.example.room.user.domain;
+package com.example.room.user.entity;
 
+import com.example.room.common.constants.LocationStatus;
+import com.example.room.common.constants.SexualStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @SuperBuilder
@@ -24,4 +27,14 @@ public abstract class User {
 
     @Column(nullable = false)
     private String nickName;
+
+    @Enumerated(EnumType.STRING)
+    private LocationStatus location;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updateDate;
+
 }

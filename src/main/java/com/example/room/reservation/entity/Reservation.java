@@ -1,7 +1,8 @@
 package com.example.room.reservation.entity;
 
+import com.example.room.space.entity.fee.Fee;
 import com.example.room.guest.entity.Guest;
-import com.example.room.space.entity.SpaceEntity;
+import com.example.room.space.entity.space.Space;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,7 +10,7 @@ import java.util.Date;
 @Entity(name = "RESERVATION")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "reservationType")
-public class ReservationEntity {
+public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,14 +18,25 @@ public class ReservationEntity {
 
     private int peopleCount;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
-
     private String request;
+
+    private String response;
+
+    private boolean confirmed;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date reservationDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date responseDate;
 
     @ManyToOne
     @JoinColumn(name = "SPACE_ID")
-    SpaceEntity spaceEntity;
+    Space space;
+
+    @OneToOne
+    @JoinColumn(name = "FEE_ID")
+    Fee fee;
 
     @ManyToOne
     @JoinColumn(name = "GUEST_ID")

@@ -4,7 +4,6 @@ import com.example.room.guest.dao.GuestDAO;
 import com.example.room.guest.dto.GuestDto;
 import com.example.room.guest.entity.Guest;
 import com.example.room.guest.service.impl.GuestServiceImpl;
-import com.example.room.user.domain.SexualStatus;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,16 +34,14 @@ public class GuestServiceTest {
                 .age(23)
                 .name("T")
                 .nickName("abc")
-                .sexual(SexualStatus.FEMALE)
-                .businessNumber(12341234).build();
+                .sexual(SexualStatus.FEMALE).build();
 
         guest = Guest.builder()
                 .id(1)
                 .age(23)
                 .name("T")
                 .nickName("abc")
-                .sexual(SexualStatus.FEMALE)
-                .businessNumber(12341234).build();
+                .sexual(SexualStatus.FEMALE).build();
     }
 
     @Test

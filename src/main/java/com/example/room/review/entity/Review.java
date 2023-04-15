@@ -1,12 +1,13 @@
 package com.example.room.review.entity;
 
 import com.example.room.guest.entity.Guest;
+import com.example.room.space.entity.space.Space;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity(name = "REVIEW")
-public class ReviewEntity {
+public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +24,14 @@ public class ReviewEntity {
     @Temporal(TemporalType.DATE)
     private Date createDate;
 
+    @Temporal(TemporalType.DATE)
+    private Date updateDate;
+
     @ManyToOne
     @JoinColumn(name = "GUEST_ID")
     Guest guest;
+
+    @ManyToOne
+    @JoinColumn(name = "SPACE_ID")
+    Space space;
 }

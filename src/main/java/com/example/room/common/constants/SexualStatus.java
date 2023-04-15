@@ -1,4 +1,4 @@
-package com.example.room.user.domain;
+package com.example.room.common.constants;
 
 public enum SexualStatus {
     MALE,
