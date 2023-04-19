@@ -6,5 +6,5 @@ public interface GuestService {
 
     GuestDto join(GuestDto guestDto);
 
-    GuestDto find(String name);
+    GuestDto find(String nickName);
 }

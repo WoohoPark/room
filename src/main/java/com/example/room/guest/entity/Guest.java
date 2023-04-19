@@ -12,18 +12,11 @@ import java.util.Date;
 import java.util.List;
 
 @Entity(name = "GUEST")
-@Table(uniqueConstraints = {
-        @UniqueConstraint(name = "UniqueNickName", columnNames = "nickName")
-})
 @Getter
 @SuperBuilder
 @NoArgsConstructor
+@DiscriminatorValue("guest")
 public class Guest extends User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "GUEST_ID")
-    private long  id;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date birthDate;

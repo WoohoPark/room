@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/guest")
 @AllArgsConstructor
@@ -17,17 +19,23 @@ public class GuestController {
     GuestService guestService;
 
     @PostMapping
-    @ApiOperation("게스트 회원 가입")
-    public ResponseEntity<GuestDto> join(@RequestBody GuestDto guestDto) {
+    @ApiOperation("게스트 - 회원가입")
+    public ResponseEntity<GuestDto> join(@Valid @RequestBody GuestDto guestDto) {
         GuestDto response = guestService.join(guestDto);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping
-    @ApiOperation("게스트 회원 정보 조회")
-    public ResponseEntity<GuestDto> info(@RequestParam(name ="name") String name){
-        GuestDto response = guestService.find(name);
+    @ApiOperation("게스트 - 회원조회")
+    public ResponseEntity<GuestDto> info(@RequestParam(name ="nickName") String nickName){
+        GuestDto response = guestService.find(nickName);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/login")
+    @ApiOperation("게스트 - 회원조회")
+    public ResponseEntity<String> test(){
+        return ResponseEntity.ok("TEST");
     }
 
 }

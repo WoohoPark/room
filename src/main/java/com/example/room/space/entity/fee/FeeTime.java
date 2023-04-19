@@ -13,6 +13,7 @@ public class FeeTime extends Fee {
     @Column(name = "FEE_TIME_ID")
     private long id;
 
+    @Column(length = 2)
     private MorningAfternoonStatus morningAfternoon;
 
     private int times;

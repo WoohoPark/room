@@ -1,5 +1,7 @@
 package com.example.room.guest.controller;
 
+import com.example.room.common.constants.LocationStatus;
+import com.example.room.common.constants.SexualStatus;
 import com.example.room.guest.dto.GuestDto;
 import com.example.room.guest.service.GuestService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,6 +12,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.Date;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -36,7 +40,10 @@ public class GuestControllerTest {
                 .age(23)
                 .name("T")
                 .nickName("abc")
-                .sexual(SexualStatus.FEMALE).build();
+                .sexual(SexualStatus.FEMALE)
+                .location(LocationStatus.SEOUL)
+                .createDate(new Date())
+                .build();
     }
 
     @Test
@@ -54,17 +61,20 @@ public class GuestControllerTest {
                 .andExpect(jsonPath("$.name").exists())
                 .andExpect(jsonPath("$.nickName").exists())
                 .andExpect(jsonPath("$.sexual").exists())
-                .andExpect(jsonPath("$.businessNumber").exists())
+                .andExpect(jsonPath("$.location").exists())
                 .andDo(print());
     }
 
     @Test
     void 회원조회() throws Exception {
-        given(guestService.find("T")).willReturn(guestDto);
-        String name = "T";
+
+        String nickName = "abc";
+
+        given(guestService.find("abc")).willReturn(guestDto);
+
         mockMvc.perform(
                 get("/guest")
-                        .param("name",name)
+                        .param("nickName",nickName)
                 )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists())
@@ -72,7 +82,7 @@ public class GuestControllerTest {
                 .andExpect(jsonPath("$.name").exists())
                 .andExpect(jsonPath("$.nickName").exists())
                 .andExpect(jsonPath("$.sexual").exists())
-                .andExpect(jsonPath("$.businessNumber").exists())
+                .andExpect(jsonPath("$.location").exists())
                 .andDo(print());
     }
 }

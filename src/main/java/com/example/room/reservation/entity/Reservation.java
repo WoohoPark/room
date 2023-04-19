@@ -16,18 +16,24 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(nullable = false, length = 2)
     private int peopleCount;
 
+    @Column(nullable = false, length = 250)
     private String request;
 
+    @Column(length = 250)
     private String response;
 
+    @Column(length = 1)
     private boolean confirmed;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
     private Date reservationDate;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
     private Date responseDate;
 
     @ManyToOne

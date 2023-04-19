@@ -6,5 +6,5 @@ import com.example.room.guest.entity.Guest;
 public interface GuestDAO {
     Guest save(GuestDto guestDto);
 
-    Guest findByName(String name);
+    Guest findByNickName(String name);
 }

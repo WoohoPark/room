@@ -24,8 +24,8 @@ public class GuestServiceImpl implements GuestService {
 
     @Override
     @Transactional
-    public GuestDto find(String name) {
-        Guest guest = guestDAO.findByName(name);
+    public GuestDto find(String nickName) {
+        Guest guest = guestDAO.findByNickName(nickName);
         return new GuestDto(guest);
     }
 

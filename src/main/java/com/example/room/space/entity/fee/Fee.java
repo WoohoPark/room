@@ -4,6 +4,7 @@ import com.example.room.common.constants.PaymentStatus;
 import com.example.room.reservation.entity.Reservation;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity(name = "FEE")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -15,6 +16,9 @@ public class Fee {
     private long id;
 
     private int fee;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date payDate;
 
     @Enumerated(EnumType.STRING)
     private PaymentStatus payment;

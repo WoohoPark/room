@@ -20,7 +20,7 @@ public class GuestDAOImpl implements GuestDAO {
     }
 
     @Override
-    public Guest findByName(String name) {
-        return guestRepository.findByName(name);
+    public Guest findByNickName(String name) {
+        return guestRepository.findByNickName(name);
     }
 }

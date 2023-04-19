@@ -12,8 +12,10 @@ public class Rental {
     @Column(name = "RENTAL_ID")
     private long id;
 
+    @Column(length = 1)
     private boolean partySupplies;
 
+    @Column(length = 1)
     private boolean backgroundPaper;
 
     @OneToOne

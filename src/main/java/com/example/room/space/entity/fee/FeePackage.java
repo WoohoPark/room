@@ -14,6 +14,7 @@ public class FeePackage extends Fee {
     private long id;
 
     @Enumerated(EnumType.STRING)
+    @Column(length = 7)
     private PackageStatus packageType;
 
 }

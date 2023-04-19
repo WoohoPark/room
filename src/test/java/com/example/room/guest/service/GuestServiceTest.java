@@ -1,5 +1,7 @@
 package com.example.room.guest.service;
 
+import com.example.room.common.constants.LocationStatus;
+import com.example.room.common.constants.SexualStatus;
 import com.example.room.guest.dao.GuestDAO;
 import com.example.room.guest.dto.GuestDto;
 import com.example.room.guest.entity.Guest;
@@ -10,6 +12,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+
+import java.util.Date;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -34,14 +38,19 @@ public class GuestServiceTest {
                 .age(23)
                 .name("T")
                 .nickName("abc")
-                .sexual(SexualStatus.FEMALE).build();
+                .sexual(SexualStatus.FEMALE)
+                .location(LocationStatus.SEOUL)
+                .createDate(new Date())
+                .build();
 
         guest = Guest.builder()
                 .id(1)
                 .age(23)
                 .name("T")
                 .nickName("abc")
-                .sexual(SexualStatus.FEMALE).build();
+                .sexual(SexualStatus.FEMALE)
+                .location(LocationStatus.SEOUL)
+                .build();
     }
 
     @Test
@@ -54,11 +63,16 @@ public class GuestServiceTest {
 
     @Test
     void 회원조회(){
-        String name = "T";
-        given(guestDAO.findByName(name)).willReturn(guest);
-        Guest response = guestDAO.findByName(name);
+        String nickName = "abc";
+        given(guestDAO.findByNickName(nickName)).willReturn(guest);
+        Guest response = guestDAO.findByNickName(nickName);
         Assertions.assertNotNull(response);
-        verify(guestDAO).findByName(name);
+        verify(guestDAO).findByNickName(nickName);
+    }
+
+    @Test
+    void 회원수정(){
+
     }
 
 }

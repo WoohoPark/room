@@ -1,5 +1,6 @@
 package com.example.room.space.entity.space;
 
+import com.example.room.common.constants.LocationStatus;
 import com.example.room.host.entity.Host;
 import com.example.room.reservation.entity.Reservation;
 import com.example.room.review.entity.Review;
@@ -7,6 +8,7 @@ import com.example.room.space.entity.facility.Facility;
 import com.example.room.space.entity.rental.Rental;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -20,13 +22,23 @@ public class Space {
     @Column(name = "SPACE_ID")
     private long id;
 
+    @Column(length = 2)
     private boolean withDog;
 
+    @Column(length = 2)
     private int peopleCount;
 
+    @Column(length = 30)
     private String name;
 
-    private String location;
+    @Column(nullable = false,length = 5)
+    private LocationStatus location;
+
+    @Column(precision = 10, scale = 7)
+    private BigDecimal latitude;
+
+    @Column(precision = 10, scale = 7)
+    private BigDecimal longitude;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;

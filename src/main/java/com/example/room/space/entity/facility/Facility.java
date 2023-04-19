@@ -12,19 +12,19 @@ public class Facility {
     @Column(name = "FACILITY_ID")
     private long id;
 
-    @Column
+    @Column(length = 1)
     private boolean light;
 
-    @Column
+    @Column(length = 1)
     private boolean speaker;
 
-    @Column
+    @Column(length = 1)
     private boolean tableYn;
 
-    @Column
+    @Column(length = 1)
     private boolean tableware;
 
-    @Column
+    @Column(length = 1)
     private boolean wifi;
 
     @OneToOne
