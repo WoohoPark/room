@@ -1,7 +1,7 @@
 package com.example.room.space.entity.space;
 
 import com.example.room.common.constants.LocationStatus;
-import com.example.room.host.entity.Host;
+import com.example.room.user.entity.Host;
 import com.example.room.reservation.entity.Reservation;
 import com.example.room.review.entity.Review;
 import com.example.room.space.entity.facility.Facility;

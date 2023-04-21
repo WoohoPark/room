@@ -1,4 +1,4 @@
-package com.example.room.common.exception.domain;
+package com.example.room.common.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

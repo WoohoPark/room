@@ -1,13 +1,11 @@
 package com.example.room.user.controller;
 
-import com.example.room.guest.dto.GuestDto;
+import com.example.room.common.config.auth.constants.AuthRoleStatus;
 import com.example.room.user.dto.UserDto;
 import com.example.room.user.service.UserService;
 import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -21,9 +19,9 @@ public class UserController {
 
     @PostMapping
     @ApiOperation("회원 등록")
-    public ResponseEntity<String> join(@RequestBody UserDto userDto){
-        userService.join(userDto);
-        return ResponseEntity.ok("JOIN SUCCESS");
+    public ResponseEntity<UserDto> join(@RequestBody UserDto userDto){
+        UserDto response = userService.join(userDto);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/login")
