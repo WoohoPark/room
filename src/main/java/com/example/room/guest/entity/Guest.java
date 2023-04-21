@@ -18,6 +18,8 @@ import java.util.List;
 @DiscriminatorValue("guest")
 public class Guest extends User {
 
+    // TODO : VALIDATION
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date birthDate;
 

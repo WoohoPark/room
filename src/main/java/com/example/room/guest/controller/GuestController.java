@@ -1,6 +1,8 @@
 package com.example.room.guest.controller;
 
+import com.example.room.common.config.mapper.annotation.ToEntity;
 import com.example.room.guest.dto.GuestDto;
+import com.example.room.guest.entity.Guest;
 import com.example.room.guest.service.GuestService;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -20,7 +22,7 @@ public class GuestController {
 
     @PostMapping
     @ApiOperation("게스트 - 회원가입")
-    public ResponseEntity<GuestDto> join(@Valid @RequestBody GuestDto guestDto) {
+    public ResponseEntity<GuestDto> join(@Valid @RequestBody @ToEntity(Guest.class) GuestDto guestDto) {
         GuestDto response = guestService.join(guestDto);
         return ResponseEntity.ok(response);
     }

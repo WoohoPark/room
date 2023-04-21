@@ -1,6 +1,7 @@
 package com.example.room.common.config.jwt;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 
 import javax.servlet.FilterChain;
@@ -21,7 +22,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
     private static final String HEADER_NAME = JwtProperties.HEADER_NAME;
     private static final String TOKEN_PREFIX = JwtProperties.TOKEN_PREFIX;
     private static final String SECRET_KEY = JwtProperties.SECRET;
@@ -32,10 +33,10 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+    public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
+
         String header = request.getHeader(HEADER_NAME);
-        System.out.println("header :"+header);
 
         if(header == null || !header.startsWith(TOKEN_PREFIX)) {
             chain.doFilter(request, response);
@@ -59,7 +60,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         }
 
         // TODO : NULL CHECK
-        String nickName = (String)claims.get("sub");
+        String nickName = (String) Objects.requireNonNull(claims).get("sub");
 
         Optional.ofNullable(nickName).orElseThrow(() ->  new IllegalArgumentException("해당 닉네임이 존재하지 않습니다."));
 

@@ -20,7 +20,7 @@ public class HostDto {
      private Date updateDate;
      private int businessNumber;
 
-        @Builder
+     @Builder
     public HostDto(long userNo, String id, int age, SexualStatus sexual, String name, String nickName, LocationStatus location, Date createDate, Date updateDate, int businessNumber) {
         this.userNo = userNo;
         this.id = id;

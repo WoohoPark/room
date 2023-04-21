@@ -34,8 +34,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        log.info(" 로그인인증필터좀타라!!!!!!");
-
         // TODO : NULL CHECK
         UserDto userDto = new UserDto();
 
@@ -60,7 +58,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         AuthUserDetails authUserDetails = (AuthUserDetails) authResult.getPrincipal();
         String bToken = jwtTokenProvider.createToken(authUserDetails);
-        String header = jwtTokenProvider.getHeaderName();
+        String header = JwtProperties.HEADER_NAME;
         response.addHeader(header,bToken);
     }
 

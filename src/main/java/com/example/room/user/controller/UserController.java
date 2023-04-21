@@ -1,5 +1,6 @@
 package com.example.room.user.controller;
 
+import com.example.room.guest.dto.GuestDto;
 import com.example.room.user.dto.UserDto;
 import com.example.room.user.service.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -8,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/user")
@@ -34,4 +37,19 @@ public class UserController {
     public ResponseEntity<String> authentication(){
         return ResponseEntity.ok("권한인증");
     }
+
+//    @PostMapping
+//    @ApiOperation("게스트 - 회원가입")
+//    public ResponseEntity<GuestDto> join(@Valid @RequestBody UserDto userDto) {
+//        GuestDto response = userService.join(guestDto);
+//        return ResponseEntity.ok(response);
+//    }
+
+//    @GetMapping
+//    @ApiOperation("게스트 - 회원조회")
+//    public ResponseEntity<GuestDto> info(@RequestParam(name ="nickName") String nickName){
+//        GuestDto response = userService.find(nickName);
+//        return ResponseEntity.ok(response);
+//    }
+
 }

@@ -1,6 +1,6 @@
 package com.example.room.common.config.auth;
 
-import com.example.room.common.config.constants.AuthRoleStatus;
+import com.example.room.common.config.auth.constants.AuthRoleStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;

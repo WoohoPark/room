@@ -1,15 +1,12 @@
 package com.example.room.user.dto;
 
-import com.example.room.common.config.constants.AuthRoleStatus;
+import com.example.room.common.config.auth.constants.AuthRoleStatus;
 import com.example.room.common.constants.LocationStatus;
 import com.example.room.common.constants.SexualStatus;
 import com.example.room.user.entity.User;
 import lombok.Getter;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
-import java.util.Optional;
 
 @Getter
 public class UserDto {

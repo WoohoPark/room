@@ -1,6 +1,6 @@
 package com.example.room.user.entity;
 
-import com.example.room.common.config.constants.AuthRoleStatus;
+import com.example.room.common.config.auth.constants.AuthRoleStatus;
 import com.example.room.common.constants.LocationStatus;
 import com.example.room.common.constants.SexualStatus;
 import lombok.Getter;
