@@ -1,6 +1,6 @@
 package com.example.room.reservation.entity;
 
-import com.example.room.space.entity.fee.Fee;
+import com.example.room.fee.Fee;
 import com.example.room.space.entity.space.Space;
 import com.example.room.user.entity.Guest;
 

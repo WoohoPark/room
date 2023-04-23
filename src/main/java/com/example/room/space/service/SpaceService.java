@@ -1,5 +1,6 @@
 package com.example.room.space.service;
 
+import com.example.room.space.dto.RentalDto;
 import com.example.room.space.dto.SpaceDto;
 import com.example.room.space.entity.space.Space;
 
@@ -14,4 +15,6 @@ public interface SpaceService {
     Space update();
 
     void delete();
+
+    RentalDto findRentalById(long id);
 }

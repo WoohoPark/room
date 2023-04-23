@@ -1,6 +1,7 @@
 package com.example.room.space.entity.space;
 
 import com.example.room.common.constants.LocationStatus;
+import com.example.room.common.constants.SpaceTypeStatus;
 import com.example.room.user.entity.Host;
 import com.example.room.reservation.entity.Reservation;
 import com.example.room.review.entity.Review;
@@ -18,7 +19,6 @@ import java.util.List;
 @Getter
 @Entity(name = "SPACE")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "SPACE_TYPE")
 @NoArgsConstructor
 public class Space {
 
@@ -37,7 +37,11 @@ public class Space {
     private String name;
 
     @Column(nullable = false,length = 5)
+    @Enumerated(EnumType.STRING)
     private LocationStatus location;
+
+    @Column(nullable = false, length = 10)
+    private SpaceTypeStatus spaceType;
 
     @Column(precision = 10, scale = 7)
     private BigDecimal latitude;
@@ -50,8 +54,11 @@ public class Space {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateDate;
-
-    @OneToOne(mappedBy = "space")
+    @OneToOne(
+            mappedBy = "space",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private Rental rental;
 
     @OneToOne(mappedBy = "space")
@@ -93,4 +100,6 @@ public class Space {
         this.reviews = reviews;
         this.reservations = reservations;
     }
+
+
 }

@@ -1,6 +1,10 @@
 package com.example.room.common.exception;
 
+import com.example.room.common.constants.ErrorResponseStatus;
+import com.example.room.common.response.BasicResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Slf4j
@@ -32,19 +36,15 @@ public class CommonException {
 //
 //        return new ResponseEntity<>(errorResponse,HttpStatus.BAD_REQUEST);
 //    }
-//
-//    @ExceptionHandler(DataIntegrityViolationException.class)
-//    public ResponseEntity<ErrorResponse> uniqueKeyViolationException() {
-//        log.error("중복값이 들어 왔음!!!");
-//
-//        ErrorResponse errorResponse = ErrorResponse.builder()
-//                .status(HttpStatus.LOCKED.value())
-//                .message(ErrorCodeStatus.ALREADY_SAVED_NICKNAME.getMessage())
-//                .code(ErrorCodeStatus.ALREADY_SAVED_NICKNAME.getStatus())
-//                .build();
-//
-//        return new ResponseEntity<>(errorResponse,HttpStatus.BAD_REQUEST);
-//    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public BasicResponse<?> uniqueKeyViolationException() {
+        log.error("DB UNIQUE KEY DUPLICATION");
+        return BasicResponse.builder()
+                .status(ErrorResponseStatus.ALREADY_SAVED_NICKNAME.getStatus())
+                .message(ErrorResponseStatus.ALREADY_SAVED_NICKNAME.getMessage())
+                .build();
+    }
 //
 //    @ExceptionHandler(NullPointerException.class)
 //    public ResponseEntity<ErrorResponse> nullPointException() {

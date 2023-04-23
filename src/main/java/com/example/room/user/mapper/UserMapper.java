@@ -10,27 +10,22 @@ import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
+import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE
 )
 public interface UserMapper {
-
+    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
     // TODO : THROW EXCEPTION
-
-    // RequestDto -> MessageBodyDto 매
-//    @Mapping(source="pageDto.pageCount", target="pageCnt")
-//    partySupplies
-//        backgroundPaper
-//    @Mapping(source="spaceDto.rentalDto",target = "rental")
     User convertUserEntity(UserDto userDto);
-//    Rental convertRentalEntity(RentalDto rentalDto);
-
-//    @InheritInverseConfiguration(name = "convertSpaceEntity")
-//    @InheritInverseConfiguration
-//@Mapping(source="space.rental",target = "rentalDto")
     @InheritInverseConfiguration
     UserDto convertUserDto(User user);
-//    RentalDto convertRentalDto(Rental rental);
+    List<User> convertUsersEntity(List<UserDto> usersDto);
+    List<UserDto> convertUsersDto(List<User> users);
+
+
 
 }

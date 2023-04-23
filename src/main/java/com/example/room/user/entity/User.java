@@ -15,10 +15,12 @@ import java.util.Optional;
 
 @Entity
 @Table(
-        name = "USERS",
-        uniqueConstraints = {
-        @UniqueConstraint(name = "UniqueNickName", columnNames = "nickName")
-})
+    name = "USERS"
+//    ,
+//    uniqueConstraints = {
+//        @UniqueConstraint(name = "UniqueNickName", columnNames = "nickName")
+//    })
+)
 @Getter
 @SuperBuilder
 @NoArgsConstructor
@@ -31,15 +33,14 @@ public class User {
     @Column(name = "USER_NO")
     private long userNo;
 
-    @Column(nullable = false , length = 30)
+    @Column(nullable = false, length = 30)
     private String id;
 
-    @Column(nullable = false , length = 100)
+    @Column(nullable = false, length = 100)
     private String password;
 
     @Column(nullable = false)
     private int age;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private AuthRoleStatus role;
@@ -79,5 +80,9 @@ public class User {
         Optional<String> optionalRoles = Optional.ofNullable(role.toString());
 //        String roles = optionalRoles.get();
         return Arrays.asList(optionalRoles.get().split(","));
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
