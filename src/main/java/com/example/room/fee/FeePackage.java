@@ -1,4 +1,4 @@
-package com.example.room.space.entity.fee;
+package com.example.room.fee;
 
 import com.example.room.common.constants.PackageStatus;
 
