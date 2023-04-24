@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 @NoArgsConstructor
 public class RentalDto {
+
     private long id;
     private boolean partySupplies;
     private boolean backgroundPaper;

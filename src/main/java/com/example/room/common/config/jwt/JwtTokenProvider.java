@@ -18,23 +18,24 @@ import java.util.Date;
 @Component
 @RequiredArgsConstructor
 public class JwtTokenProvider {
+
     private Key key;
 
     @PostConstruct
-    protected void init(){
+    protected void init() {
         byte[] keyBytes = Decoders.BASE64.decode(JwtProperties.SECRET);
         key = Keys.hmacShaKeyFor(keyBytes);
     }
 
     public String createToken(AuthUserDetails authUserDetails) {
         // TODO : authUserDetails null check
-        return JwtProperties.TOKEN_PREFIX+Jwts.builder()
-                .setSubject(authUserDetails.getNickName())
-                .claim("userName",authUserDetails.getUsername())
-                .claim("userId",authUserDetails.getId())
-                .setExpiration(new Date(System.currentTimeMillis()+JwtProperties.EXPIRED_TIME))
-                .signWith(key, SignatureAlgorithm.HS256)
-                .compact();
+        return JwtProperties.TOKEN_PREFIX + Jwts.builder()
+            .setSubject(authUserDetails.getNickName())
+            .claim("userName", authUserDetails.getUsername())
+            .claim("userId", authUserDetails.getId())
+            .setExpiration(new Date(System.currentTimeMillis() + JwtProperties.EXPIRED_TIME))
+            .signWith(key, SignatureAlgorithm.HS256)
+            .compact();
 
     }
 

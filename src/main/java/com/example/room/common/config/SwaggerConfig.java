@@ -17,19 +17,19 @@ public class SwaggerConfig {
     @Bean
     public Docket restAPI() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.example.room"))
-                .paths(PathSelectors.any())
-                .build();
+            .apiInfo(apiInfo())
+            .select()
+            .apis(RequestHandlerSelectors.basePackage("com.example.room"))
+            .paths(PathSelectors.any())
+            .build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Real-World-Room-Application")
-                .version("1.0.0")
-                .description("공간을 예약하고 리뷰하는 Demo 프로젝트")
-                .build();
+            .title("Real-World-Room-Application")
+            .version("1.0.0")
+            .description("공간을 예약하고 리뷰하는 Demo 프로젝트")
+            .build();
     }
 
 }

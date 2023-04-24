@@ -5,4 +5,3 @@ public enum PackageStatus {
     AFTER,
     NIGHT;
 }
-

@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @Getter
 public class BasicResponse<T> {
+
     private final int status;
     private final T data;
     private final String message;

@@ -18,7 +18,7 @@ public class AuthRole implements GrantedAuthority {
     @Bean
     public RoleHierarchy roleHierarchy() {
         RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
-        roleHierarchy.setHierarchy(AuthRoleStatus.HOST.name()+">"+AuthRoleStatus.GUEST.name());
+        roleHierarchy.setHierarchy(AuthRoleStatus.HOST.name() + ">" + AuthRoleStatus.GUEST.name());
         return roleHierarchy;
     }
 }

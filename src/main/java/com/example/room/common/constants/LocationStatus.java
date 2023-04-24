@@ -16,8 +16,9 @@ public enum LocationStatus {
     JEJU(064);
 
     private int areaCode;
+
     LocationStatus(int areaCode) {
-        this.areaCode=areaCode;
+        this.areaCode = areaCode;
     }
 
     public int getAreaCode() {

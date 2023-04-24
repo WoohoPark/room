@@ -35,38 +35,37 @@ public class SecurityConfig {
     @Bean
     public WebSecurityCustomizer configure() {
         return (web) -> web.ignoring().mvcMatchers(
-                "/swagger-ui/**",
-                "/h2-console/**"
+            "/swagger-ui/**",
+            "/h2-console/**"
         );
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .formLogin().disable()
-                .httpBasic().disable()
-//                .apply(new AuthCustomFilter())
-//                .and()
-//                .apply(new AuthCustomFilter())
-                .authorizeRequests()
-                .antMatchers("/guest/test2")
-                .authenticated()
-                .anyRequest()
-                .permitAll()
-                .and().build();
+            .csrf().disable()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .formLogin().disable()
+            .httpBasic().disable()
+            .authorizeRequests()
+            .antMatchers("/guest/test2")
+            .authenticated()
+            .anyRequest()
+            .permitAll()
+            .and().build();
     }
 
     public class AuthCustomFilter extends AbstractHttpConfigurer<AuthCustomFilter, HttpSecurity> {
+
         @Override
         public void configure(HttpSecurity http) throws Exception {
-            AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
+            AuthenticationManager authenticationManager = http.getSharedObject(
+                AuthenticationManager.class);
             http
-                    .addFilter(corsConfig.corsFilter())
-                    .addFilter(new JwtAuthenticationFilter(authenticationManager,jwtTokenProvider))
-                    .addFilter(new JwtAuthorizationFilter(authenticationManager, userRepository));
+                .addFilter(corsConfig.corsFilter())
+                .addFilter(new JwtAuthenticationFilter(authenticationManager, jwtTokenProvider))
+                .addFilter(new JwtAuthorizationFilter(authenticationManager, userRepository));
         }
     }
 

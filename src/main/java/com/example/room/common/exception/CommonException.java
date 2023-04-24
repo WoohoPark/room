@@ -4,12 +4,21 @@ import com.example.room.common.constants.ErrorResponseStatus;
 import com.example.room.common.response.BasicResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Slf4j
 @RestControllerAdvice
 public class CommonException {
+
+    @ExceptionHandler(RuntimeException.class)
+    public BasicResponse<?> handlerException(final RuntimeException error) {
+        return BasicResponse.builder()
+            .status(HttpStatus.SERVICE_UNAVAILABLE.value())
+            .message(error.getMessage())
+            .build();
+    }
 //
 //    @ExceptionHandler(Exception.class)
 //    public ResponseEntity<ErrorResponse> errorException(Exception e){
@@ -41,10 +50,19 @@ public class CommonException {
     public BasicResponse<?> uniqueKeyViolationException() {
         log.error("DB UNIQUE KEY DUPLICATION");
         return BasicResponse.builder()
-                .status(ErrorResponseStatus.ALREADY_SAVED_NICKNAME.getStatus())
-                .message(ErrorResponseStatus.ALREADY_SAVED_NICKNAME.getMessage())
-                .build();
+            .status(ErrorResponseStatus.ALREADY_SAVED_NICKNAME.getStatus())
+            .message(ErrorResponseStatus.ALREADY_SAVED_NICKNAME.getMessage())
+            .build();
     }
+//
+//    @ExceptionHandler(IllegalArgumentException.class)
+//    public BasicResponse<?> argumentException() {
+//        log.error("BAD ARGUMENT");
+//        return BasicResponse.builder()
+//            .status(ErrorResponseStatus.ALREADY_SAVED_NICKNAME.getStatus())
+//            .message(ErrorResponseStatus.ALREADY_SAVED_NICKNAME.getMessage())
+//            .build();
+//    }
 //
 //    @ExceptionHandler(NullPointerException.class)
 //    public ResponseEntity<ErrorResponse> nullPointException() {

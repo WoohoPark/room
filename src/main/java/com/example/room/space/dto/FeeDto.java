@@ -12,6 +12,7 @@ import java.util.Date;
 @EqualsAndHashCode
 @NoArgsConstructor
 public class FeeDto {
+
     private long id;
     private int fee;
     private Date payDate;

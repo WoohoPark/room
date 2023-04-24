@@ -15,7 +15,7 @@ public class AuthUserDetails implements UserDetails {
         this.user = user;
     }
 
-    public String getNickName(){
+    public String getNickName() {
         return user.getNickName();
     }
 

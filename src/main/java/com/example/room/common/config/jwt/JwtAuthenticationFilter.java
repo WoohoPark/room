@@ -26,14 +26,16 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private final JwtTokenProvider jwtTokenProvider;
     private final ObjectMapper om = new ObjectMapper();
 
-    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider) {
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager,
+        JwtTokenProvider jwtTokenProvider) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
         setFilterProcessesUrl(JwtProperties.LOGIN_URL);
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+    public Authentication attemptAuthentication(HttpServletRequest request,
+        HttpServletResponse response) throws AuthenticationException {
         // TODO : NULL CHECK
         UserDto userDto = new UserDto();
 
@@ -47,19 +49,21 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         }
 
         UsernamePasswordAuthenticationToken authenticationToken =
-                    new UsernamePasswordAuthenticationToken(
-                                                            userDto.getId(),
-                                                            userDto.getPassword());
+            new UsernamePasswordAuthenticationToken(
+                userDto.getId(),
+                userDto.getPassword());
 
         return authenticationManager.authenticate(authenticationToken);
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+    protected void successfulAuthentication(HttpServletRequest request,
+        HttpServletResponse response, FilterChain chain, Authentication authResult)
+        throws IOException, ServletException {
         AuthUserDetails authUserDetails = (AuthUserDetails) authResult.getPrincipal();
         String bToken = jwtTokenProvider.createToken(authUserDetails);
         String header = JwtProperties.HEADER_NAME;
-        response.addHeader(header,bToken);
+        response.addHeader(header, bToken);
     }
 
 }

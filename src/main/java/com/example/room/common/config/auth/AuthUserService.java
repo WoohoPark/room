@@ -18,7 +18,8 @@ public class AuthUserService implements UserDetailsService {
 
     @Override
     public AuthUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = Optional.ofNullable(userRepository.findById(username)).orElseThrow(() -> new IllegalArgumentException("해당 ID로 조회되는 사용자가 없습니다."));
+        User user = Optional.ofNullable(userRepository.findById(username))
+            .orElseThrow(() -> new IllegalArgumentException("해당 ID로 조회되는 사용자가 없습니다."));
         return new AuthUserDetails(user);
     }
 }
