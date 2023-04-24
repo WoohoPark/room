@@ -36,7 +36,7 @@ public class Space {
     @Column(length = 30)
     private String name;
 
-    @Column(nullable = false,length = 5)
+    @Column(nullable = false, length = 5)
     @Enumerated(EnumType.STRING)
     private LocationStatus location;
 
@@ -55,9 +55,9 @@ public class Space {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateDate;
     @OneToOne(
-            mappedBy = "space",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+        mappedBy = "space",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
     )
     private Rental rental;
 
@@ -83,8 +83,11 @@ public class Space {
     private void onUpdate() {
         updateDate = new Date();
     }
+
     @Builder
-    public Space(long id, boolean withDog, int peopleCount, String name, LocationStatus location, BigDecimal latitude, BigDecimal longitude, Date createDate, Date updateDate, Rental rental, Facility facility, Host host, List<Review> reviews, List<Reservation> reservations) {
+    public Space(long id, boolean withDog, int peopleCount, String name, LocationStatus location,
+        BigDecimal latitude, BigDecimal longitude, Date createDate, Date updateDate, Rental rental,
+        Facility facility, Host host, List<Review> reviews, List<Reservation> reservations) {
         this.id = id;
         this.withDog = withDog;
         this.peopleCount = peopleCount;

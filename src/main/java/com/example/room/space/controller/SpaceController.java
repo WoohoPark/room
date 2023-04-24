@@ -13,23 +13,23 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/space")
 @RequiredArgsConstructor
 public class SpaceController {
+
     private final SpaceService spaceService;
 
     @PostMapping
-    @ApiOperation("SPACE-CREATE")
-    public ResponseEntity<SpaceDto> create(@RequestBody SpaceDto spaceDto){
+    @ApiOperation("공간_생성")
+    public ResponseEntity<SpaceDto> create(@RequestBody SpaceDto spaceDto) {
         SpaceDto response = spaceService.create(spaceDto);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping
-    @ApiOperation("공간별 - 렌탈 세부내역조회")
-    public BasicResponse<RentalDto> findRentalById(long userNo){
+    @ApiOperation("공간_렌탈_조회")
+    public BasicResponse<RentalDto> findRentalById(long userNo) {
         RentalDto response = spaceService.findRentalById(userNo);
         return BasicResponse.<RentalDto>builder()
-                .data(response)
-                .build();
+            .data(response)
+            .build();
     }
-
 
 }

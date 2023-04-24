@@ -13,6 +13,7 @@ import java.util.Date;
 @EqualsAndHashCode
 @NoArgsConstructor
 public class SpaceDto {
+
     private long id;
     private boolean withDog;
     private int peopleCount;
@@ -26,7 +27,9 @@ public class SpaceDto {
     private FeeDto feeDto;
 
     @Builder
-    public SpaceDto(long id, boolean withDog, int peopleCount, String name, LocationStatus location, BigDecimal latitude, BigDecimal longitude, Date createDate, Date updateDate, RentalDto rentalDto, FeeDto feeDto) {
+    public SpaceDto(long id, boolean withDog, int peopleCount, String name, LocationStatus location,
+        BigDecimal latitude, BigDecimal longitude, Date createDate, Date updateDate,
+        RentalDto rentalDto, FeeDto feeDto) {
         this.id = id;
         this.withDog = withDog;
         this.peopleCount = peopleCount;
