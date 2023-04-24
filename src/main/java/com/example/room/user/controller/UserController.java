@@ -1,17 +1,13 @@
 package com.example.room.user.controller;
 
 import com.example.room.common.response.BasicResponse;
-import com.example.room.user.dto.SearchDto;
 import com.example.room.user.dto.UserDto;
-import com.example.room.user.entity.User;
 import com.example.room.user.service.UserService;
 import io.swagger.annotations.ApiOperation;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -33,47 +29,37 @@ public class UserController {
     }
 
     @PostMapping
-    @ApiOperation("회원_등록&수정")
-    public BasicResponse<User> join(@RequestBody User user) {
-        User response = userService.join(user);
-        return BasicResponse.<User>builder()
+    @ApiOperation("회원_등록")
+    public BasicResponse<UserDto> join(@RequestBody UserDto requestUserDto) {
+        UserDto responseDto = userService.join(requestUserDto);
+        return BasicResponse.<UserDto>builder()
+            .data(responseDto)
+            .build();
+    }
+
+    @PutMapping
+    @ApiOperation("회원_수정")
+    public BasicResponse<UserDto> update(@RequestBody UserDto requestUserDto) {
+        UserDto responseDto = userService.update(requestUserDto);
+        return BasicResponse.<UserDto>builder()
+            .data(responseDto)
+            .build();
+    }
+
+    @DeleteMapping
+    @ApiOperation("회원 삭제")
+    public BasicResponse removeByUserNo(long userNo) {
+        userService.remove(userNo);
+        return BasicResponse.builder().build();
+    }
+
+    @GetMapping
+    @ApiOperation("회원 전체 검색")
+    public BasicResponse<List<UserDto>> findAll(int page, int size, String direction,
+        String property) {
+        List<UserDto> response = userService.findAll(page, size, direction, property);
+        return BasicResponse.<List<UserDto>>builder()
             .data(response)
             .build();
     }
-//
-//    @PutMapping
-//    @ApiOperation("회원_수정")
-//    public BasicResponse<Long> edit(@RequestBody UserDto userDto){
-////        userService.save(userDto);
-//        long response = 1000L;
-////        //TODO : MEMBER PUT
-//        return BasicResponse.<Long>builder()
-//                .data(response)
-//                .build();
-//    }
-//
-//    @DeleteMapping
-//    @ApiOperation("회원 삭제")
-//    public BasicResponse removeByUserNo(long userNo){
-//        return BasicResponse.builder().build();
-//    }
-
-//    @GetMapping
-//    @ApiOperation("회원 검색(조건)")
-//    public BasicResponse<List<UserDto>> findAllByNickNameOrRoleByUpdateAtDesc(SearchDto searchDto){
-//        List<UserDto> response = userService.findAllByNickNameOrRoleByUpdateAtDesc(searchDto);
-//        return BasicResponse.<List<UserDto>>builder()
-//                .data(response)
-//                .build();
-//    }
-
-//    @GetMapping
-//    @ApiOperation("회원 검색(조건)")
-//    public BasicResponse<List<UserDto>> findAllByNickNameOrRoleByUpdateAtDesc(SearchDto searchDto) {
-//        List<UserDto> response = userService.findAllByNickNameOrRoleByUpdateAtDesc(searchDto);
-//        return BasicResponse.<List<UserDto>>builder()
-//            .data(response)
-//            .build();
-//    }
-
 }
