@@ -2,6 +2,9 @@ package com.example.room.space.entity.space;
 
 import com.example.room.common.constants.LocationStatus;
 import com.example.room.common.constants.SpaceTypeStatus;
+import com.example.room.space.dto.RequestRentalDto;
+import com.example.room.space.dto.ResponseRentalDto;
+import com.example.room.space.dto.ResponseSpaceDto;
 import com.example.room.user.entity.Host;
 import com.example.room.reservation.entity.Reservation;
 import com.example.room.review.entity.Review;
@@ -18,7 +21,6 @@ import java.util.List;
 
 @Getter
 @Entity(name = "SPACE")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @NoArgsConstructor
 public class Space {
 
@@ -41,6 +43,7 @@ public class Space {
     private LocationStatus location;
 
     @Column(nullable = false, length = 10)
+    @Enumerated(EnumType.STRING)
     private SpaceTypeStatus spaceType;
 
     @Column(precision = 10, scale = 7)
@@ -54,24 +57,26 @@ public class Space {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateDate;
+
     @OneToOne(
         mappedBy = "space",
         cascade = CascadeType.ALL,
-        orphanRemoval = true
+        orphanRemoval = true,
+        fetch = FetchType.LAZY
     )
     private Rental rental;
 
-    @OneToOne(mappedBy = "space")
+    @OneToOne(mappedBy = "space", fetch = FetchType.LAZY)
     private Facility facility;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "HOST_ID")
     Host host;
 
-    @OneToMany(mappedBy = "space")
+    @OneToMany(mappedBy = "space", fetch = FetchType.LAZY)
     List<Review> reviews;
 
-    @OneToMany(mappedBy = "space")
+    @OneToMany(mappedBy = "space", fetch = FetchType.LAZY)
     List<Reservation> reservations;
 
     @PrePersist
@@ -87,7 +92,8 @@ public class Space {
     @Builder
     public Space(long id, boolean withDog, int peopleCount, String name, LocationStatus location,
         BigDecimal latitude, BigDecimal longitude, Date createDate, Date updateDate, Rental rental,
-        Facility facility, Host host, List<Review> reviews, List<Reservation> reservations) {
+        Facility facility, Host host, List<Review> reviews, List<Reservation> reservations,
+        SpaceTypeStatus spaceType) {
         this.id = id;
         this.withDog = withDog;
         this.peopleCount = peopleCount;
@@ -100,9 +106,32 @@ public class Space {
         this.rental = rental;
         this.facility = facility;
         this.host = host;
+        this.spaceType = spaceType;
         this.reviews = reviews;
         this.reservations = reservations;
     }
 
+    public ResponseSpaceDto toDto() {
+        return ResponseSpaceDto.builder()
+            .id(id)
+            .withDog(withDog)
+            .peopleCount(peopleCount)
+            .name(name)
+            .location(location)
+            .latitude(latitude)
+            .longitude(longitude)
+            .createDate(createDate)
+            .updateDate(updateDate)
+            .rentalDto(rental.toDto())
+            .build();
+    }
 
+    public void updateRental(RequestRentalDto requestRentalDto) {
+        this.rental = Rental.builder()
+            .id(requestRentalDto.getId())
+            .partySupplies(requestRentalDto.isPartySupplies())
+            .backgroundPaper(requestRentalDto.isBackgroundPaper())
+            .space(this)
+            .build();
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.room.space.entity.rental;
 
+import com.example.room.space.dto.ResponseRentalDto;
 import com.example.room.space.entity.space.Space;
 import lombok.Builder;
 import lombok.Getter;
@@ -33,5 +34,13 @@ public class Rental {
         this.partySupplies = partySupplies;
         this.backgroundPaper = backgroundPaper;
         this.space = space;
+    }
+
+    public ResponseRentalDto toDto() {
+        return ResponseRentalDto.builder()
+            .id(id)
+            .partySupplies(partySupplies)
+            .backgroundPaper(backgroundPaper)
+            .build();
     }
 }

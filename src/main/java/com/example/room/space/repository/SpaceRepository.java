@@ -1,10 +1,12 @@
 package com.example.room.space.repository;
 
-import com.example.room.space.entity.rental.Rental;
 import com.example.room.space.entity.space.Space;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SpaceRepository extends JpaRepository<Space, Long> {
 
-    Space findSpaceById(long id);
+    Optional<Space> findSpaceById(long id);
+
+    Optional<Space> findSpaceRentalById(long id);
 }

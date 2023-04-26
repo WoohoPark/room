@@ -1,4 +1,4 @@
-package com.example.room.space.dto;
+package com.example.room.fee.dto;
 
 import com.example.room.common.constants.PaymentStatus;
 import lombok.Builder;

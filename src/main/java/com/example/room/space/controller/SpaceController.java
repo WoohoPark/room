@@ -1,12 +1,12 @@
 package com.example.room.space.controller;
 
 import com.example.room.common.response.BasicResponse;
-import com.example.room.space.dto.RentalDto;
-import com.example.room.space.dto.SpaceDto;
+import com.example.room.space.dto.RequestSpaceDto;
+import com.example.room.space.dto.ResponseRentalDto;
+import com.example.room.space.dto.ResponseSpaceDto;
 import com.example.room.space.service.SpaceService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,16 +18,21 @@ public class SpaceController {
 
     @PostMapping
     @ApiOperation("공간_생성")
-    public ResponseEntity<SpaceDto> create(@RequestBody SpaceDto spaceDto) {
-        SpaceDto response = spaceService.create(spaceDto);
-        return ResponseEntity.ok(response);
+    public BasicResponse<ResponseSpaceDto> create(@RequestBody RequestSpaceDto requestSpaceDto
+//,        @AuthenticationPrincipal RequestUserDto userDto
+    ) {
+        //TODO 테스트코드 작성, 권한 적용
+        ResponseSpaceDto response = spaceService.create(requestSpaceDto);
+        return BasicResponse.<ResponseSpaceDto>builder().data(response).build();
     }
 
-    @GetMapping
+    @GetMapping("/{spaceId}")
     @ApiOperation("공간_렌탈_조회")
-    public BasicResponse<RentalDto> findRentalById(long userNo) {
-        RentalDto response = spaceService.findRentalById(userNo);
-        return BasicResponse.<RentalDto>builder()
+    public BasicResponse<ResponseRentalDto> findSpaceById(
+        @PathVariable(name = "spaceId") long id) {
+        //TODO 테스트코드 작성, 권한 적용
+        ResponseRentalDto response = spaceService.findSpaceById(id);
+        return BasicResponse.<ResponseRentalDto>builder()
             .data(response)
             .build();
     }

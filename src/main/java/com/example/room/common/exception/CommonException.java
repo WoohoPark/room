@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class CommonException {
 
-    @ExceptionHandler(RuntimeException.class)
-    public BasicResponse<?> handlerException(final RuntimeException error) {
-        return BasicResponse.builder()
-            .status(HttpStatus.SERVICE_UNAVAILABLE.value())
-            .message(error.getMessage())
-            .build();
-    }
+//    @ExceptionHandler(RuntimeException.class)
+//    public BasicResponse<?> handlerException(final RuntimeException error) {
+//        return BasicResponse.builder()
+//            .status(HttpStatus.SERVICE_UNAVAILABLE.value())
+//            .message(error.getMessage())
+//            .build();
+//    }
 //
 //    @ExceptionHandler(Exception.class)
 //    public ResponseEntity<ErrorResponse> errorException(Exception e){
