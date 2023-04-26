@@ -1,5 +1,5 @@
 # Space_Reservation_Toy_Project
-### 서비스 중인 모임 서비스 일부 기능인 `공간 예약 시스템` 부분을 모티브하여 설계 및 구현 하는 토이 프로젝트입니다.
+`공간 예약 시스템`을 모티브하여 설계 및 구현 하는 토이 프로젝트입니다.
 
 ---
 ### 기술 스택
@@ -32,10 +32,9 @@
 1. 대략적으로 엔티티 간의 관계와 확장될 수 있는 엔티티의 상속 관계를 표현 하였습니다.
 
 ## 2. 엔티티 패키지 정의
+![](src/main/resources/image/Entity_Package_Relation.png)
 1. 같은 패키지에 엔티티들은 같은 라이프사이클을 갖고 있습니다.
 2. 같은 패키지에 엔티티들은 객체 그래프를 통하여 참조하고, 타 패키지 간에는 Id 참조하고 있습니다.
-
-![](src/main/resources/image/Entity_Package_Relation.png)
 
 ## 3. 엔티티 필드 정의
 ![](src/main/resources/image/Entity_FieldAndRelation.png)
