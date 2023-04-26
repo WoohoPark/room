@@ -1,4 +1,4 @@
-package com.example.room.fee;
+package com.example.room.fee.entity;
 
 import com.example.room.common.constants.MorningAfternoonStatus;
 
