@@ -18,20 +18,20 @@ public class SpaceServiceImpl implements SpaceService {
 
     private final SpaceRepository spaceRepository;
 
-    private final SpaceMapper spaceMapper;
+//    private final SpaceMapper spaceMapper;
 
     @Override
     @Transactional
     public SpaceDto create(SpaceDto spaceDto) {
-        Space paramEntity = spaceMapper.convertSpaceEntity(spaceDto);
-        Space resultEntity = spaceRepository.save(paramEntity);
-        return spaceMapper.convertSpaceDto(resultEntity);
+//        Space paramEntity = spaceMapper.convertSpaceEntity(spaceDto);
+//        Space resultEntity = spaceRepository.save(paramEntity);
+        return null;
     }
 
     @Override
     public RentalDto findRentalById(long id) {
-        Space space = spaceRepository.findSpaceById(id);
-        Rental rental = space.getRental();
-        return spaceMapper.convertRentalDto(rental);
+//        Space space = spaceRepository.findSpaceById(id);
+//        Rental rental = space.getRental();
+        return null;
     }
 }
