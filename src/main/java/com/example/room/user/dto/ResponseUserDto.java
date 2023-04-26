@@ -3,14 +3,14 @@ package com.example.room.user.dto;
 import com.example.room.common.config.auth.constants.AuthRoleStatus;
 import com.example.room.common.constants.LocationStatus;
 import com.example.room.common.constants.SexualStatus;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
 import java.util.Date;
+import lombok.Builder;
+import lombok.Getter;
 
 @Getter
-@NoArgsConstructor
-public class SearchDto {
+@Builder
+public class ResponseUserDto {
+
     private long userNo;
     private String id;
     private String password;

@@ -3,8 +3,12 @@ package com.example.room.user.entity;
 import com.example.room.common.config.auth.constants.AuthRoleStatus;
 import com.example.room.common.constants.LocationStatus;
 import com.example.room.common.constants.SexualStatus;
+import com.example.room.user.dto.RequestUserDto;
+import com.example.room.user.dto.ResponseUserDto;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
@@ -16,10 +20,6 @@ import java.util.Optional;
 @Entity
 @Table(
     name = "USERS"
-//    ,
-//    uniqueConstraints = {
-//        @UniqueConstraint(name = "UniqueNickName", columnNames = "nickName")
-//    })
 )
 @Getter
 @SuperBuilder
@@ -41,6 +41,7 @@ public class User {
 
     @Column(nullable = false)
     private int age;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private AuthRoleStatus role;
@@ -76,13 +77,34 @@ public class User {
     }
 
     public List<String> getRoleList() {
-        // TODO : NULL CHECK
         Optional<String> optionalRoles = Optional.ofNullable(role.toString());
-//        String roles = optionalRoles.get();
-        return Arrays.asList(optionalRoles.get().split(","));
+        return optionalRoles.map(s -> Arrays.asList(s.split(",")))
+            .orElseGet(() -> List.of(""));
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public ResponseUserDto toDto() {
+        return ResponseUserDto.builder()
+            .id(id)
+            .age(age)
+            .location(location)
+            .nickName(nickName)
+            .password(password)
+            .name(name)
+            .sexual(sexual)
+            .userNo(userNo)
+            .role(role)
+            .createDate(createDate)
+            .updateDate(updateDate)
+            .build();
+    }
+
+    public void update(RequestUserDto requestUserDto){
+        this.age = requestUserDto.getAge();
+        this.location = requestUserDto.getLocation();
+        this.nickName = requestUserDto.getNickName();
+        this.password = requestUserDto.getPassword();
+        this.name = requestUserDto.getName();
+        this.sexual = requestUserDto.getSexual();
+        this.role = requestUserDto.getRole();
     }
 }

@@ -1,10 +1,9 @@
 package com.example.room.common.config.jwt;
 
 import com.example.room.common.config.auth.AuthUserDetails;
-import com.example.room.user.dto.UserDto;
+import com.example.room.user.dto.RequestUserDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -37,11 +36,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest request,
         HttpServletResponse response) throws AuthenticationException {
         // TODO : NULL CHECK
-        UserDto userDto = new UserDto();
+        RequestUserDto requestUserDto = new RequestUserDto();
 
         try {
             InputStream inputStream = request.getInputStream();
-            userDto = om.readValue(inputStream, UserDto.class);
+            requestUserDto = om.readValue(inputStream, RequestUserDto.class);
         } catch (MismatchedInputException e) {
             throw new IllegalArgumentException("로그인 정보가 올바르게 입력되지 않았습니다.");
         } catch (IOException e) {
@@ -50,8 +49,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         UsernamePasswordAuthenticationToken authenticationToken =
             new UsernamePasswordAuthenticationToken(
-                userDto.getId(),
-                userDto.getPassword());
+                requestUserDto.getId(),
+                requestUserDto.getPassword());
 
         return authenticationManager.authenticate(authenticationToken);
     }
