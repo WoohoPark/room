@@ -1,7 +1,6 @@
 package com.example.room.space.entity.rental;
 
-import com.example.room.space.dto.ResponseRentalDto;
-import com.example.room.space.entity.space.Space;
+import com.example.room.space.dto.RentalDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,20 +23,15 @@ public class Rental {
     @Column(length = 1)
     private boolean backgroundPaper;
 
-    @OneToOne
-    @JoinColumn(name = "SPACE_ID")
-    private Space space;
-
     @Builder
-    public Rental(long id, boolean partySupplies, boolean backgroundPaper, Space space) {
+    public Rental(long id, boolean partySupplies, boolean backgroundPaper) {
         this.id = id;
         this.partySupplies = partySupplies;
         this.backgroundPaper = backgroundPaper;
-        this.space = space;
     }
 
-    public ResponseRentalDto toDto() {
-        return ResponseRentalDto.builder()
+    public RentalDto toDto() {
+        return RentalDto.builder()
             .id(id)
             .partySupplies(partySupplies)
             .backgroundPaper(backgroundPaper)

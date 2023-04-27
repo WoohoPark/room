@@ -7,6 +7,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface SpaceRepository extends JpaRepository<Space, Long> {
 
     Optional<Space> findSpaceById(long id);
-
-    Optional<Space> findSpaceRentalById(long id);
 }

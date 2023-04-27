@@ -1,11 +1,11 @@
 package com.example.room.space.dto;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
-public class RequestRentalDto {
+@Builder
+public class RentalDto {
 
     private long id;
     private boolean partySupplies;

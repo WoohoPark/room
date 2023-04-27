@@ -2,9 +2,10 @@ package com.example.room.space.entity.space;
 
 import com.example.room.common.constants.LocationStatus;
 import com.example.room.common.constants.SpaceTypeStatus;
-import com.example.room.space.dto.RequestRentalDto;
-import com.example.room.space.dto.ResponseRentalDto;
-import com.example.room.space.dto.ResponseSpaceDto;
+import com.example.room.space.dto.FacilityDto;
+import com.example.room.space.dto.RentalDto;
+import com.example.room.space.dto.RequestSpace;
+import com.example.room.space.dto.ResponseSpace;
 import com.example.room.user.entity.Host;
 import com.example.room.reservation.entity.Reservation;
 import com.example.room.review.entity.Review;
@@ -58,25 +59,28 @@ public class Space {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateDate;
 
-    @OneToOne(
-        mappedBy = "space",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true,
-        fetch = FetchType.LAZY
-    )
+    //    @OneToOne(
+//        mappedBy = "space",
+//        cascade = CascadeType.ALL,
+//        orphanRemoval = true,
+//        fetch = FetchType.LAZY
+//    )
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "RENTAL_ID")
     private Rental rental;
 
-    @OneToOne(mappedBy = "space", fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "FACILITY_ID")
     private Facility facility;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "HOST_ID")
     Host host;
 
-    @OneToMany(mappedBy = "space", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "space")
     List<Review> reviews;
 
-    @OneToMany(mappedBy = "space", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "space")
     List<Reservation> reservations;
 
     @PrePersist
@@ -111,8 +115,8 @@ public class Space {
         this.reservations = reservations;
     }
 
-    public ResponseSpaceDto toDto() {
-        return ResponseSpaceDto.builder()
+    public ResponseSpace toDto() {
+        return ResponseSpace.builder()
             .id(id)
             .withDog(withDog)
             .peopleCount(peopleCount)
@@ -123,15 +127,39 @@ public class Space {
             .createDate(createDate)
             .updateDate(updateDate)
             .rentalDto(rental.toDto())
+            .facilityDto(facility.toDto())
             .build();
     }
 
-    public void updateRental(RequestRentalDto requestRentalDto) {
+    public void updateRental(RentalDto rentalDto) {
         this.rental = Rental.builder()
-            .id(requestRentalDto.getId())
-            .partySupplies(requestRentalDto.isPartySupplies())
-            .backgroundPaper(requestRentalDto.isBackgroundPaper())
-            .space(this)
+            .id(rentalDto.getId())
+            .partySupplies(rentalDto.isPartySupplies())
+            .backgroundPaper(rentalDto.isBackgroundPaper())
             .build();
+    }
+
+    public void updateFacility(FacilityDto facilityDto) {
+        this.facility = Facility.builder()
+            .id(facilityDto.getId())
+            .light(facilityDto.isLight())
+            .speaker(facilityDto.isSpeaker())
+            .tableware(facilityDto.isTableware())
+            .tableYn(facilityDto.isTableYn())
+            .wifi(facilityDto.isWifi())
+            .build();
+    }
+
+    public void update(RequestSpace requestSpace) {
+        this.id = requestSpace.getId();
+        this.withDog = requestSpace.isWithDog();
+        this.peopleCount = requestSpace.getPeopleCount();
+        this.name = requestSpace.getName();
+        this.location = requestSpace.getLocation();
+        this.latitude = requestSpace.getLatitude();
+        this.longitude = requestSpace.getLongitude();
+        this.updateRental(requestSpace.getRentalDto());
+        this.updateFacility(requestSpace.getFacilityDto());
+        this.spaceType = requestSpace.getSpaceType();
     }
 }

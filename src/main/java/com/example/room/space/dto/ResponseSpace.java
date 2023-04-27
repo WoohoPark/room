@@ -9,7 +9,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class ResponseSpaceDto {
+public class ResponseSpace {
 
     private long id;
     private boolean withDog;
@@ -20,6 +20,7 @@ public class ResponseSpaceDto {
     private BigDecimal longitude;
     private Date createDate;
     private Date updateDate;
-    private ResponseRentalDto rentalDto;
+    private RentalDto rentalDto;
+    private FacilityDto facilityDto;
     private FeeDto feeDto;
 }

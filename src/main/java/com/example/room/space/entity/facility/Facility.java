@@ -1,10 +1,12 @@
 package com.example.room.space.entity.facility;
 
-import com.example.room.space.entity.space.Space;
-
+import com.example.room.space.dto.FacilityDto;
 import javax.persistence.*;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Entity(name = "FACILITY")
+@NoArgsConstructor
 public class Facility {
 
     @Id
@@ -27,8 +29,27 @@ public class Facility {
     @Column(length = 1)
     private boolean wifi;
 
-    @OneToOne
-    @JoinColumn(name = "SPACE_ID")
-    private Space space;
+    @Builder
+    public Facility(long id, boolean light, boolean speaker, boolean tableYn, boolean tableware,
+        boolean wifi) {
+        this.id = id;
+        this.light = light;
+        this.speaker = speaker;
+        this.tableYn = tableYn;
+        this.tableware = tableware;
+        this.wifi = wifi;
+    }
 
+    public FacilityDto toDto() {
+        return FacilityDto.builder()
+            .id(id)
+            .light(light)
+            .speaker(speaker)
+            .tableYn(tableYn)
+            .tableware(tableware)
+            .wifi(wifi)
+            .build();
+    }
 }
+
+

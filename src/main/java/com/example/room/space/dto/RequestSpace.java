@@ -2,7 +2,6 @@ package com.example.room.space.dto;
 
 import com.example.room.common.constants.LocationStatus;
 import com.example.room.common.constants.SpaceTypeStatus;
-import com.example.room.fee.dto.FeeDto;
 import com.example.room.space.entity.space.Space;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -10,12 +9,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 @Getter
 @EqualsAndHashCode
 @NoArgsConstructor
-public class RequestSpaceDto {
+public class RequestSpace {
 
     private long id;
     private boolean withDog;
@@ -24,18 +22,15 @@ public class RequestSpaceDto {
     private LocationStatus location;
     private BigDecimal latitude;
     private BigDecimal longitude;
-    private RequestRentalDto requestRentalDto;
+    private RentalDto rentalDto;
     private SpaceTypeStatus spaceType;
-
-//    private Re feeDto;
+    private FacilityDto facilityDto;
 
     @Builder
-    public RequestSpaceDto(long id, boolean withDog, int peopleCount, String name,
+    public RequestSpace(long id, boolean withDog, int peopleCount, String name,
         LocationStatus location, BigDecimal latitude, BigDecimal longitude,
         SpaceTypeStatus spaceType,
-        RequestRentalDto requestRentalDto
-//        , FeeDto feeDto
-    ) {
+        RentalDto rentalDto, FacilityDto facilityDto) {
         this.id = id;
         this.withDog = withDog;
         this.peopleCount = peopleCount;
@@ -44,8 +39,8 @@ public class RequestSpaceDto {
         this.latitude = latitude;
         this.longitude = longitude;
         this.spaceType = spaceType;
-        this.requestRentalDto = requestRentalDto;
-//        this.feeDto = feeDto;
+        this.rentalDto = rentalDto;
+        this.facilityDto = facilityDto;
     }
 
     public Space toEntity() {
@@ -58,9 +53,5 @@ public class RequestSpaceDto {
             .latitude(latitude)
             .spaceType(spaceType)
             .build();
-    }
-
-    public RequestRentalDto getRentalDto() {
-        return this.requestRentalDto;
     }
 }
