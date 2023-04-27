@@ -15,7 +15,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
 @DataJpaTest
-
 class UserRepositoryTest {
 
     @Autowired
@@ -121,6 +120,6 @@ class UserRepositoryTest {
         userRepository.deleteByUserNo(userNo);
 
         //then
-        assertThat(userRepository.findByUserNo(userNo)).isNull();
+        assertThat(userRepository.findByUserNo(userNo)).isEmpty();
     }
 }
