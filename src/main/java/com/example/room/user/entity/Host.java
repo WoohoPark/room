@@ -21,5 +21,4 @@ public class Host extends User {
     private List<Space> spaces;
 
     private int businessNumber;
-
 }

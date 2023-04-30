@@ -11,16 +11,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
-import java.util.Date;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Getter
 @NoArgsConstructor
 public class RequestUserDto {
 
-    private long userNo;
+    private Long userNo;
 
     @Size(min = 5, max = 30)
     @NotBlank(message = "ID를 입력해주세요.")
@@ -41,6 +38,9 @@ public class RequestUserDto {
     @NotNull(message = "나이를 입력해주세요.")
     private int age;
 
+    @NotNull(message = "보유 금액을 입력해주세요.")
+    private int money;
+
     @NotNull(message = "사용자유형을 입력해주세요.")
     private AuthRoleStatus role;
 
@@ -53,7 +53,7 @@ public class RequestUserDto {
 
     @Builder
     public RequestUserDto(long userNo, String id, String password, int age, AuthRoleStatus role,
-        SexualStatus sexual, String name, String nickName, LocationStatus location) {
+        SexualStatus sexual, String name, String nickName, LocationStatus location, int money) {
         this.userNo = userNo;
         this.id = id;
         this.password = password;
@@ -63,22 +63,21 @@ public class RequestUserDto {
         this.name = name;
         this.nickName = nickName;
         this.location = location;
+        this.money = money;
     }
 
     public User toEntity() {
         return User.builder()
             .userNo(userNo)
             .id(id)
-            .password(this.password)
+            .password(password)
             .age(age)
             .role(role)
+            .money(money)
             .sexual(sexual)
             .name(name)
             .nickName(nickName)
             .location(location)
             .build();
-
     }
-
-
 }

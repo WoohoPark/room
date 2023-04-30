@@ -1,6 +1,6 @@
 package com.example.room.user.entity;
 
-import com.example.room.reservation.entity.Reservation;
+import com.example.room.reservation.entity.reservation.Reservation;
 import com.example.room.review.entity.Review;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,8 +16,6 @@ import java.util.List;
 @NoArgsConstructor
 @DiscriminatorValue("guest")
 public class Guest extends User {
-
-    // TODO : VALIDATION
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date birthDate;
