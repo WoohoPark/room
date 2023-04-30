@@ -10,15 +10,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User findById(String id);
 
-    User findByNickName(String nickName);
-
     Page<User> findAll(Pageable pageable);
 
-    void deleteById(String userId);
+    void deleteByUserNo(Long userNo);
 
-    void deleteByUserNo(long userNo);
+    Optional<User> findByUserNo(Long userNo);
 
-    Optional<User> findByUserNo(long userNo);
-
-//    User> findByUserNo(long userNo);
 }

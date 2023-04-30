@@ -3,6 +3,7 @@ package com.example.room.user.controller;
 import com.example.room.common.response.BasicResponse;
 import com.example.room.user.dto.RequestUserDto;
 import com.example.room.user.dto.ResponseUserDto;
+import com.example.room.user.dto.UserDto;
 import com.example.room.user.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
@@ -18,17 +19,17 @@ public class UserController {
 
     private final UserService userService;
 
-//    @GetMapping("/login")
-//    @ApiOperation("회원_로그인")
-//    public BasicResponse<UserDto> login(@RequestBody UserDto userDto) {
-//        return BasicResponse.<UserDto>builder().data(userDto).build();
-//    }
+    @PostMapping("/login")
+    @ApiOperation("회원_로그인")
+    public BasicResponse login(@RequestBody RequestUserDto userDto) {
+        return BasicResponse.builder().build();
+    }
 
-//    @GetMapping("/authentication")
-//    @ApiOperation("회원_권한&정보")
-//    public BasicResponse<UserDto> authentication(@AuthenticationPrincipal UserDto userDto) {
-//        return BasicResponse.<UserDto>builder().data(userDto).build();
-//    }
+    @GetMapping("/authentication")
+    @ApiOperation("회원_권한&정보")
+    public BasicResponse<UserDto> authentication(@AuthenticationPrincipal UserDto userDto) {
+        return BasicResponse.<UserDto>builder().data(userDto).build();
+    }
 
     @PostMapping
     @ApiOperation("회원등록_API")
@@ -51,7 +52,7 @@ public class UserController {
 
     @DeleteMapping("/{userNo}")
     @ApiOperation("회원삭제_API")
-    public BasicResponse remove(@PathVariable(name = "userNo") long userNo) {
+    public BasicResponse remove(@PathVariable(name = "userNo") Long userNo) {
         userService.deleteByUserNo(userNo);
         return BasicResponse.builder().build();
     }

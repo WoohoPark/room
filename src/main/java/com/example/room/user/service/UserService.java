@@ -5,7 +5,6 @@ import com.example.room.user.dto.ResponseUserDto;
 import com.example.room.user.entity.User;
 import com.example.room.user.repository.UserRepository;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -22,27 +21,27 @@ public class UserService {
     @Transactional
     public ResponseUserDto join(RequestUserDto requestUserDto) {
         requestUserDto.cryptPassword(bCryptPasswordEncoder);
-        return userRepository.save(requestUserDto.toEntity()).toDto();
+        return new ResponseUserDto(userRepository.save(requestUserDto.toEntity()));
     }
 
     @Transactional
     public ResponseUserDto update(RequestUserDto requestUserDto) throws Exception {
-        Optional<User> optionalUser = userRepository.findByUserNo(requestUserDto.getUserNo());
-        optionalUser.orElseThrow(() -> new Exception("수정할 수 있는 사용자가 존재하지 않습니다."));
-        User user = optionalUser.get();
+        User user = userRepository.findByUserNo(requestUserDto.getUserNo()).orElseThrow(
+            () -> new IllegalArgumentException("수정할 수 있는 사용자가 존재하지 않습니다.")
+        );
         user.update(requestUserDto);
-        return user.toDto();
+        return new ResponseUserDto(user);
     }
 
     @Transactional
     public List<ResponseUserDto> findAll() {
         return userRepository.findAll().stream()
-            .map(User::toDto)
+            .map(ResponseUserDto::new)
             .collect(Collectors.toList());
     }
 
     @Transactional
-    public void deleteByUserNo(long userNo) {
+    public void deleteByUserNo(Long userNo) {
         userRepository.deleteByUserNo(userNo);
     }
 }

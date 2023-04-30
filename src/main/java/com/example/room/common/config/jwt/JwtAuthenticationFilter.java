@@ -2,6 +2,7 @@ package com.example.room.common.config.jwt;
 
 import com.example.room.common.config.auth.AuthUserDetails;
 import com.example.room.user.dto.RequestUserDto;
+import com.example.room.user.dto.UserDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import lombok.extern.slf4j.Slf4j;
@@ -36,11 +37,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest request,
         HttpServletResponse response) throws AuthenticationException {
         // TODO : NULL CHECK
-        RequestUserDto requestUserDto = new RequestUserDto();
+        UserDto userDto = new UserDto();
 
         try {
             InputStream inputStream = request.getInputStream();
-            requestUserDto = om.readValue(inputStream, RequestUserDto.class);
+            userDto = om.readValue(inputStream, UserDto.class);
         } catch (MismatchedInputException e) {
             throw new IllegalArgumentException("로그인 정보가 올바르게 입력되지 않았습니다.");
         } catch (IOException e) {
@@ -49,8 +50,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         UsernamePasswordAuthenticationToken authenticationToken =
             new UsernamePasswordAuthenticationToken(
-                requestUserDto.getId(),
-                requestUserDto.getPassword());
+                userDto.getId(),
+                userDto.getPassword());
 
         return authenticationManager.authenticate(authenticationToken);
     }

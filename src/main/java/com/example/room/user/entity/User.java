@@ -31,7 +31,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_NO")
-    private long userNo;
+    private Long userNo;
 
     @Column(nullable = false, length = 30)
     private String id;
@@ -41,6 +41,9 @@ public class User {
 
     @Column(nullable = false)
     private int age;
+
+    @Column(nullable = false)
+    private int money;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -76,29 +79,13 @@ public class User {
         updateDate = new Date();
     }
 
-    public List<String> getRoleList() {
+    public List<String> getRoles() {
         Optional<String> optionalRoles = Optional.ofNullable(role.toString());
         return optionalRoles.map(s -> Arrays.asList(s.split(",")))
             .orElseGet(() -> List.of(""));
     }
 
-    public ResponseUserDto toDto() {
-        return ResponseUserDto.builder()
-            .id(id)
-            .age(age)
-            .location(location)
-            .nickName(nickName)
-            .password(password)
-            .name(name)
-            .sexual(sexual)
-            .userNo(userNo)
-            .role(role)
-            .createDate(createDate)
-            .updateDate(updateDate)
-            .build();
-    }
-
-    public void update(RequestUserDto requestUserDto){
+    public void update(RequestUserDto requestUserDto) {
         this.age = requestUserDto.getAge();
         this.location = requestUserDto.getLocation();
         this.nickName = requestUserDto.getNickName();

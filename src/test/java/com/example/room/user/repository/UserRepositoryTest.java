@@ -25,6 +25,7 @@ class UserRepositoryTest {
         RequestUserDto requestUserDto = RequestUserDto.builder()
             .id("wooho")
             .age(20)
+            .money(100000000)
             .location(LocationStatus.SEOUL)
             .name("jhpark")
             .nickName("WoohoPark")
@@ -41,6 +42,7 @@ class UserRepositoryTest {
         RequestUserDto expect = RequestUserDto.builder()
             .id("wooho")
             .age(20)
+            .money(100000000)
             .location(LocationStatus.SEOUL)
             .name("jhpark")
             .nickName("WoohoPark")
@@ -69,6 +71,7 @@ class UserRepositoryTest {
             .userNo(1L)
             .id("wooho")
             .age(21)
+            .money(100000000)
             .location(LocationStatus.BUSAN)
             .name("jhpark2")
             .nickName("WoohoPark2")
@@ -114,7 +117,7 @@ class UserRepositoryTest {
     @Test
     void 회원삭제(){
         //given
-        long userNo = 1L;
+        Long userNo = 1L;
 
         //when
         userRepository.deleteByUserNo(userNo);

@@ -62,12 +62,12 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         }
 
         // TODO : NULL CHECK
-        String nickName = (String) Objects.requireNonNull(claims).get("sub");
+        String id = (String) Objects.requireNonNull(claims).get("userId");
 
-        Optional.ofNullable(nickName)
-            .orElseThrow(() -> new IllegalArgumentException("해당 닉네임이 존재하지 않습니다."));
+        Optional.ofNullable(id)
+            .orElseThrow(() -> new IllegalArgumentException("해당 아이디가 존재하지 않습니다."));
 
-        User user = userRepository.findByNickName(nickName);
+        User user = userRepository.findById(id);
 
         AuthUserDetails authUserDetails = new AuthUserDetails(user);
         Authentication authentication =

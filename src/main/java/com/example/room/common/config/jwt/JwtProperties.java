@@ -6,5 +6,5 @@ public interface JwtProperties {
     long EXPIRED_TIME = (60 * 1000L) * 10;
     String TOKEN_PREFIX = "Bearer ";
     String HEADER_NAME = "Authorization";
-    String LOGIN_URL = "/guest/login";
+    String LOGIN_URL = "/user/login";
 }

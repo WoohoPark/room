@@ -48,6 +48,8 @@ public class SecurityConfig {
             .and()
             .formLogin().disable()
             .httpBasic().disable()
+            .apply(new AuthCustomFilter())
+            .and()
             .authorizeRequests()
             .antMatchers("/guest/test2")
             .authenticated()
@@ -57,7 +59,6 @@ public class SecurityConfig {
     }
 
     public class AuthCustomFilter extends AbstractHttpConfigurer<AuthCustomFilter, HttpSecurity> {
-
         @Override
         public void configure(HttpSecurity http) throws Exception {
             AuthenticationManager authenticationManager = http.getSharedObject(
@@ -68,5 +69,4 @@ public class SecurityConfig {
                 .addFilter(new JwtAuthorizationFilter(authenticationManager, userRepository));
         }
     }
-
 }
