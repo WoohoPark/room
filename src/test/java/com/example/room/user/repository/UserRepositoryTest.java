@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.example.room.common.config.auth.constants.AuthRoleStatus;
 import com.example.room.common.constants.LocationStatus;
 import com.example.room.common.constants.SexualStatus;
-import com.example.room.user.dto.RequestUserDto;
+import com.example.room.user.dto.RequestUser;
 import com.example.room.user.entity.User;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +22,7 @@ class UserRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        RequestUserDto requestUserDto = RequestUserDto.builder()
+        RequestUser requestUser = RequestUser.builder()
             .id("wooho")
             .age(20)
             .money(100000000)
@@ -33,13 +33,13 @@ class UserRepositoryTest {
             .role(AuthRoleStatus.HOST)
             .sexual(SexualStatus.FEMALE)
             .build();
-        userRepository.save(requestUserDto.toEntity());
+        userRepository.save(requestUser.toEntity());
     }
 
     @Test
     void 회원등록() {
         //given
-        RequestUserDto expect = RequestUserDto.builder()
+        RequestUser expect = RequestUser.builder()
             .id("wooho")
             .age(20)
             .money(100000000)
@@ -67,7 +67,7 @@ class UserRepositoryTest {
     @Test
     void 회원수정() {
         //given
-        RequestUserDto expect = RequestUserDto.builder()
+        RequestUser expect = RequestUser.builder()
             .userNo(1L)
             .id("wooho")
             .age(21)
@@ -101,14 +101,14 @@ class UserRepositoryTest {
         int expectAge = 20;
 
         //when
-        List<User> actuals = userRepository.findAll();
+        List<User> actual = userRepository.findAll();
 
         //then
-        assertThat(actualSize).isEqualTo(actuals.size());
-        actuals.stream().forEach(
-            actual -> {
-                assertThat(actual.getId()).isEqualTo(expectId);
-                assertThat(actual.getAge()).isEqualTo(expectAge);
+        assertThat(actualSize).isEqualTo(actual.size());
+        actual.stream().forEach(
+            obj -> {
+                assertThat(obj.getId()).isEqualTo(expectId);
+                assertThat(obj.getAge()).isEqualTo(expectAge);
             }
         );
     }

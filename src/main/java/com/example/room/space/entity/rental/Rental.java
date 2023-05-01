@@ -15,7 +15,7 @@ public class Rental {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "RENTAL_ID")
-    private long id;
+    private Long id;
 
     @Column(length = 1)
     private boolean partySupplies;
@@ -24,7 +24,7 @@ public class Rental {
     private boolean backgroundPaper;
 
     @Builder
-    public Rental(long id, boolean partySupplies, boolean backgroundPaper) {
+    public Rental(Long id, boolean partySupplies, boolean backgroundPaper) {
         this.id = id;
         this.partySupplies = partySupplies;
         this.backgroundPaper = backgroundPaper;

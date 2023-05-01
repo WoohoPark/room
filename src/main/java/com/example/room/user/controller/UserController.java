@@ -1,8 +1,8 @@
 package com.example.room.user.controller;
 
 import com.example.room.common.response.BasicResponse;
-import com.example.room.user.dto.RequestUserDto;
-import com.example.room.user.dto.ResponseUserDto;
+import com.example.room.user.dto.RequestUser;
+import com.example.room.user.dto.ResponseUser;
 import com.example.room.user.dto.UserDto;
 import com.example.room.user.service.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -21,7 +21,7 @@ public class UserController {
 
     @PostMapping("/login")
     @ApiOperation("회원_로그인")
-    public BasicResponse login(@RequestBody RequestUserDto userDto) {
+    public BasicResponse login(@RequestBody UserDto userDto) {
         return BasicResponse.builder().build();
     }
 
@@ -33,20 +33,20 @@ public class UserController {
 
     @PostMapping
     @ApiOperation("회원등록_API")
-    public BasicResponse<ResponseUserDto> join(@RequestBody @Valid RequestUserDto requestUserDto) {
-        ResponseUserDto responseDto = userService.join(requestUserDto);
-        return BasicResponse.<ResponseUserDto>builder()
+    public BasicResponse<ResponseUser> join(@RequestBody @Valid RequestUser requestUser) {
+        ResponseUser responseDto = userService.join(requestUser);
+        return BasicResponse.<ResponseUser>builder()
             .data(responseDto)
             .build();
     }
 
     @PutMapping
     @ApiOperation("회원수정_API")
-    public BasicResponse<ResponseUserDto> update(
-        @RequestBody @Valid RequestUserDto requestUserDto) throws Exception {
-        ResponseUserDto responseUserDto = userService.update(requestUserDto);
-        return BasicResponse.<ResponseUserDto>builder()
-            .data(responseUserDto)
+    public BasicResponse<ResponseUser> update(
+        @RequestBody @Valid RequestUser requestUser) {
+        ResponseUser response = userService.update(requestUser);
+        return BasicResponse.<ResponseUser>builder()
+            .data(response)
             .build();
     }
 
@@ -59,9 +59,9 @@ public class UserController {
 
     @GetMapping
     @ApiOperation("회원전체조회_API")
-    public BasicResponse<List<ResponseUserDto>> findAll() {
-        List<ResponseUserDto> response = userService.findAll();
-        return BasicResponse.<List<ResponseUserDto>>builder()
+    public BasicResponse<List<ResponseUser>> findAll() {
+        List<ResponseUser> response = userService.findAll();
+        return BasicResponse.<List<ResponseUser>>builder()
             .data(response)
             .build();
     }

@@ -15,7 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Getter
 @NoArgsConstructor
-public class RequestUserDto {
+public class RequestUser {
 
     private Long userNo;
 
@@ -52,7 +52,7 @@ public class RequestUserDto {
     }
 
     @Builder
-    public RequestUserDto(long userNo, String id, String password, int age, AuthRoleStatus role,
+    public RequestUser(long userNo, String id, String password, int age, AuthRoleStatus role,
         SexualStatus sexual, String name, String nickName, LocationStatus location, int money) {
         this.userNo = userNo;
         this.id = id;

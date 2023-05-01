@@ -2,12 +2,11 @@ package com.example.room.space.entity.space;
 
 import com.example.room.common.constants.LocationStatus;
 import com.example.room.common.constants.SpaceTypeStatus;
-import com.example.room.space.dto.FacilityDto;
-import com.example.room.space.dto.RentalDto;
 import com.example.room.space.dto.RequestSpace;
 import com.example.room.space.dto.ResponseSpace;
+import com.example.room.space.entity.fee.Fee;
 import com.example.room.user.entity.Host;
-import com.example.room.reservation.entity.Reservation;
+import com.example.room.reservation.entity.reservation.Reservation;
 import com.example.room.review.entity.Review;
 import com.example.room.space.entity.facility.Facility;
 import com.example.room.space.entity.rental.Rental;
@@ -28,7 +27,7 @@ public class Space {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "SPACE_ID")
-    private long id;
+    private Long id;
 
     @Column(length = 2)
     private boolean withDog;
@@ -59,19 +58,28 @@ public class Space {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateDate;
 
-    //    @OneToOne(
-//        mappedBy = "space",
-//        cascade = CascadeType.ALL,
-//        orphanRemoval = true,
-//        fetch = FetchType.LAZY
-//    )
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToOne(
+        cascade = CascadeType.ALL,
+        orphanRemoval = true,
+        fetch = FetchType.LAZY
+    )
     @JoinColumn(name = "RENTAL_ID")
     private Rental rental;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(
+        cascade = CascadeType.ALL,
+        orphanRemoval = true,
+        fetch = FetchType.LAZY
+    )
     @JoinColumn(name = "FACILITY_ID")
     private Facility facility;
+
+    @OneToOne(
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    @JoinColumn(name = "FEE_ID")
+    private Fee fee;
 
     @ManyToOne
     @JoinColumn(name = "HOST_ID")
@@ -97,7 +105,7 @@ public class Space {
     public Space(long id, boolean withDog, int peopleCount, String name, LocationStatus location,
         BigDecimal latitude, BigDecimal longitude, Date createDate, Date updateDate, Rental rental,
         Facility facility, Host host, List<Review> reviews, List<Reservation> reservations,
-        SpaceTypeStatus spaceType) {
+        SpaceTypeStatus spaceType,Fee fee) {
         this.id = id;
         this.withDog = withDog;
         this.peopleCount = peopleCount;
@@ -113,6 +121,7 @@ public class Space {
         this.spaceType = spaceType;
         this.reviews = reviews;
         this.reservations = reservations;
+        this.fee =fee;
     }
 
     public ResponseSpace toDto() {
@@ -129,37 +138,5 @@ public class Space {
             .rentalDto(rental.toDto())
             .facilityDto(facility.toDto())
             .build();
-    }
-
-    public void updateRental(RentalDto rentalDto) {
-        this.rental = Rental.builder()
-            .id(rentalDto.getId())
-            .partySupplies(rentalDto.isPartySupplies())
-            .backgroundPaper(rentalDto.isBackgroundPaper())
-            .build();
-    }
-
-    public void updateFacility(FacilityDto facilityDto) {
-        this.facility = Facility.builder()
-            .id(facilityDto.getId())
-            .light(facilityDto.isLight())
-            .speaker(facilityDto.isSpeaker())
-            .tableware(facilityDto.isTableware())
-            .tableYn(facilityDto.isTableYn())
-            .wifi(facilityDto.isWifi())
-            .build();
-    }
-
-    public void update(RequestSpace requestSpace) {
-        this.id = requestSpace.getId();
-        this.withDog = requestSpace.isWithDog();
-        this.peopleCount = requestSpace.getPeopleCount();
-        this.name = requestSpace.getName();
-        this.location = requestSpace.getLocation();
-        this.latitude = requestSpace.getLatitude();
-        this.longitude = requestSpace.getLongitude();
-        this.updateRental(requestSpace.getRentalDto());
-        this.updateFacility(requestSpace.getFacilityDto());
-        this.spaceType = requestSpace.getSpaceType();
     }
 }

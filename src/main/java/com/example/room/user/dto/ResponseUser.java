@@ -9,7 +9,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class ResponseUserDto {
+public class ResponseUser {
 
     private final Long userNo;
     private final String id;
@@ -24,7 +24,23 @@ public class ResponseUserDto {
     private final Date updateDate;
 
     @Builder
-    public ResponseUserDto(User user) {
+    public ResponseUser(Long userNo, String id, String password, int age, AuthRoleStatus role,
+        SexualStatus sexual, String name, String nickName, LocationStatus location, Date createDate,
+        Date updateDate) {
+        this.userNo = userNo;
+        this.id = id;
+        this.password = password;
+        this.age = age;
+        this.role = role;
+        this.sexual = sexual;
+        this.name = name;
+        this.nickName = nickName;
+        this.location = location;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+    }
+
+    public ResponseUser(User user) {
         this.userNo = user.getUserNo();
         this.id = user.getId();
         this.password = user.getPassword();

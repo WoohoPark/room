@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class RequestSpace {
 
-    private long id;
+    private Long id;
     private boolean withDog;
     private int peopleCount;
     private String name;
@@ -25,12 +25,13 @@ public class RequestSpace {
     private RentalDto rentalDto;
     private SpaceTypeStatus spaceType;
     private FacilityDto facilityDto;
+    private FeeDto feeDto;
 
     @Builder
-    public RequestSpace(long id, boolean withDog, int peopleCount, String name,
+    public RequestSpace(Long id, boolean withDog, int peopleCount, String name,
         LocationStatus location, BigDecimal latitude, BigDecimal longitude,
         SpaceTypeStatus spaceType,
-        RentalDto rentalDto, FacilityDto facilityDto) {
+        RentalDto rentalDto, FacilityDto facilityDto, FeeDto feeDto) {
         this.id = id;
         this.withDog = withDog;
         this.peopleCount = peopleCount;
@@ -41,6 +42,7 @@ public class RequestSpace {
         this.spaceType = spaceType;
         this.rentalDto = rentalDto;
         this.facilityDto = facilityDto;
+        this.feeDto = feeDto;
     }
 
     public Space toEntity() {
@@ -52,6 +54,9 @@ public class RequestSpace {
             .longitude(longitude)
             .latitude(latitude)
             .spaceType(spaceType)
+            .facility(facilityDto.toEntity())
+            .rental(rentalDto.toEntity())
+            .fee(feeDto.toEntity())
             .build();
     }
 }

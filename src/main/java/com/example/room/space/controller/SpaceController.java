@@ -22,7 +22,6 @@ public class SpaceController {
     @PostMapping
     @ApiOperation("공간_생성")
     public BasicResponse<ResponseSpace> create(@RequestBody RequestSpace requestSpace
-//,        @AuthenticationPrincipal RequestUserDto userDto
     ) {
         ResponseSpace response = spaceService.create(requestSpace);
         return BasicResponse.<ResponseSpace>builder()
@@ -41,28 +40,25 @@ public class SpaceController {
     @GetMapping("/{spaceId}")
     @ApiOperation("공간_세부조회")
     public BasicResponse<ResponseSpace> findBySpaceId(
-        @PathVariable(name = "spaceId") long id) {
+        @PathVariable(name = "spaceId") Long id) {
         ResponseSpace response = spaceService.findBySpaceId(id);
         return BasicResponse.<ResponseSpace>builder().data(response).build();
     }
 
     @DeleteMapping("/{spaceId}")
     @ApiOperation("공간_삭제")
-    public BasicResponse remove(@PathVariable(name = "spaceId") long id) {
+    public BasicResponse remove(@PathVariable(name = "spaceId") Long id) {
         spaceService.deleteBySpaceId(id);
         return BasicResponse.builder().build();
     }
 
-
     @PutMapping
     @ApiOperation("공간_수정")
     public BasicResponse<ResponseSpace> update(@RequestBody RequestSpace requestSpace
-//,        @AuthenticationPrincipal RequestUserDto userDto
     ) {
         ResponseSpace response = spaceService.update(requestSpace);
         return BasicResponse.<ResponseSpace>builder()
             .data(response)
             .build();
     }
-
 }

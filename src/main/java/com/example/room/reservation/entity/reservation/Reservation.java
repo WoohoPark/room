@@ -1,6 +1,7 @@
-package com.example.room.reservation.entity;
+package com.example.room.reservation.entity.reservation;
 
-import com.example.room.fee.entity.Fee;
+import com.example.room.common.constants.ReservationStateStatus;
+import com.example.room.reservation.entity.pay.Pay;
 import com.example.room.space.entity.space.Space;
 import com.example.room.user.entity.Guest;
 
@@ -23,10 +24,13 @@ public class Reservation {
     private String request;
 
     @Column(length = 250)
-    private String response;
+    private String message;
 
     @Column(length = 1)
     private boolean confirmed;
+
+    @Column(length = 6)
+    private ReservationStateStatus reservationStateStatus;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
@@ -34,15 +38,15 @@ public class Reservation {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
-    private Date responseDate;
+    private Date responseExpirationDate;
 
     @ManyToOne
     @JoinColumn(name = "SPACE_ID")
     Space space;
 
     @OneToOne
-    @JoinColumn(name = "FEE_ID")
-    Fee fee;
+    @MapsId
+    Pay pay;
 
     @ManyToOne
     @JoinColumn(name = "GUEST_ID")

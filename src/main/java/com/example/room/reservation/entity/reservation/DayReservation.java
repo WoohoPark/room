@@ -1,4 +1,4 @@
-package com.example.room.reservation.entity;
+package com.example.room.reservation.entity.reservation;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;

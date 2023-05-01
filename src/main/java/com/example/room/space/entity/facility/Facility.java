@@ -3,8 +3,10 @@ package com.example.room.space.entity.facility;
 import com.example.room.space.dto.FacilityDto;
 import javax.persistence.*;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @Entity(name = "FACILITY")
 @NoArgsConstructor
 public class Facility {
@@ -12,7 +14,7 @@ public class Facility {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "FACILITY_ID")
-    private long id;
+    private Long id;
 
     @Column(length = 1)
     private boolean light;
@@ -30,7 +32,7 @@ public class Facility {
     private boolean wifi;
 
     @Builder
-    public Facility(long id, boolean light, boolean speaker, boolean tableYn, boolean tableware,
+    public Facility(Long id, boolean light, boolean speaker, boolean tableYn, boolean tableware,
         boolean wifi) {
         this.id = id;
         this.light = light;

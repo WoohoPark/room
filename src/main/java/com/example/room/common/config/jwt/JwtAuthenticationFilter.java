@@ -1,7 +1,6 @@
 package com.example.room.common.config.jwt;
 
 import com.example.room.common.config.auth.AuthUserDetails;
-import com.example.room.user.dto.RequestUserDto;
 import com.example.room.user.dto.UserDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;

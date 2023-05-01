@@ -7,8 +7,8 @@ import static org.mockito.Mockito.when;
 import com.example.room.common.config.auth.constants.AuthRoleStatus;
 import com.example.room.common.constants.LocationStatus;
 import com.example.room.common.constants.SexualStatus;
-import com.example.room.user.dto.RequestUserDto;
-import com.example.room.user.dto.ResponseUserDto;
+import com.example.room.user.dto.RequestUser;
+import com.example.room.user.dto.ResponseUser;
 import com.example.room.user.entity.User;
 import com.example.room.user.repository.UserRepository;
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ class UserServiceTest {
     @Test
     void 회원등록() {
         //given
-        RequestUserDto expect = RequestUserDto.builder()
+        RequestUser expect = RequestUser.builder()
             .id("wooho")
             .age(20)
             .money(100000000)
@@ -51,7 +51,7 @@ class UserServiceTest {
 
         //when & stub
         when(userRepository.save(any())).thenReturn(expect.toEntity());
-        ResponseUserDto actual = userService.join(expect);
+        ResponseUser actual = userService.join(expect);
 
         //then
         assertThat(actual.getId()).isEqualTo(expect.getId());
@@ -67,7 +67,7 @@ class UserServiceTest {
     void 회원수정() throws Exception {
         //given
         long userNo = 1L;
-        RequestUserDto expect = RequestUserDto.builder()
+        RequestUser expect = RequestUser.builder()
             .userNo(1L)
             .id("wooho2")
             .age(22)
@@ -83,7 +83,7 @@ class UserServiceTest {
 
         //when & stub
         when(userRepository.findByUserNo(userNo)).thenReturn(optionalExpected);
-        ResponseUserDto actual = userService.update(expect);
+        ResponseUser actual = userService.update(expect);
 
         //then
         assertThat(actual.getId()).isEqualTo(expect.getId());
@@ -126,7 +126,7 @@ class UserServiceTest {
 
         //when & stub
         when(userRepository.findAll()).thenReturn(expect);
-        List<ResponseUserDto> actual = userService.findAll();
+        List<ResponseUser> actual = userService.findAll();
 
         //then
         assertThat(actual.size()).isEqualTo(expectSize);

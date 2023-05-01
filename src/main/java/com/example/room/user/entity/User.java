@@ -3,8 +3,8 @@ package com.example.room.user.entity;
 import com.example.room.common.config.auth.constants.AuthRoleStatus;
 import com.example.room.common.constants.LocationStatus;
 import com.example.room.common.constants.SexualStatus;
-import com.example.room.user.dto.RequestUserDto;
-import com.example.room.user.dto.ResponseUserDto;
+import com.example.room.user.dto.RequestUser;
+import com.example.room.user.dto.ResponseUser;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -85,13 +85,13 @@ public class User {
             .orElseGet(() -> List.of(""));
     }
 
-    public void update(RequestUserDto requestUserDto) {
-        this.age = requestUserDto.getAge();
-        this.location = requestUserDto.getLocation();
-        this.nickName = requestUserDto.getNickName();
-        this.password = requestUserDto.getPassword();
-        this.name = requestUserDto.getName();
-        this.sexual = requestUserDto.getSexual();
-        this.role = requestUserDto.getRole();
+    public void update(RequestUser RequestUser) {
+        this.age = RequestUser.getAge();
+        this.location = RequestUser.getLocation();
+        this.nickName = RequestUser.getNickName();
+        this.password = RequestUser.getPassword();
+        this.name = RequestUser.getName();
+        this.sexual = RequestUser.getSexual();
+        this.role = RequestUser.getRole();
     }
 }
