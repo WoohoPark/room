@@ -2,7 +2,7 @@ package com.example.room.space.dto;
 
 import com.example.room.common.constants.LocationStatus;
 import com.example.room.common.constants.SpaceTypeStatus;
-import com.example.room.space.entity.space.Space;
+import com.example.room.space.entity.Space;
 import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Builder;

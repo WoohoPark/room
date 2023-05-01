@@ -2,7 +2,8 @@ package com.example.room.space.dto;
 
 import com.example.room.common.constants.LocationStatus;
 import com.example.room.common.constants.SpaceTypeStatus;
-import com.example.room.space.entity.space.Space;
+import com.example.room.space.entity.Space;
+import com.example.room.user.entity.User;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -16,6 +17,7 @@ import java.math.BigDecimal;
 public class RequestSpace {
 
     private Long id;
+    private Long userNo;
     private boolean withDog;
     private int peopleCount;
     private String name;
@@ -28,7 +30,7 @@ public class RequestSpace {
     private FeeDto feeDto;
 
     @Builder
-    public RequestSpace(Long id, boolean withDog, int peopleCount, String name,
+    public RequestSpace(Long id, Long userNo, boolean withDog, int peopleCount, String name,
         LocationStatus location, BigDecimal latitude, BigDecimal longitude,
         SpaceTypeStatus spaceType,
         RentalDto rentalDto, FacilityDto facilityDto, FeeDto feeDto) {
@@ -45,7 +47,7 @@ public class RequestSpace {
         this.feeDto = feeDto;
     }
 
-    public Space toEntity() {
+    public Space toEntity(User user) {
         return Space.builder()
             .withDog(withDog)
             .peopleCount(peopleCount)
@@ -57,6 +59,7 @@ public class RequestSpace {
             .facility(facilityDto.toEntity())
             .rental(rentalDto.toEntity())
             .fee(feeDto.toEntity())
+            .user(user)
             .build();
     }
 }

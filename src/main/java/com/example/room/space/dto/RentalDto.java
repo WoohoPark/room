@@ -1,6 +1,6 @@
 package com.example.room.space.dto;
 
-import com.example.room.space.entity.rental.Rental;
+import com.example.room.space.entity.Rental;
 import lombok.Builder;
 import lombok.Getter;
 

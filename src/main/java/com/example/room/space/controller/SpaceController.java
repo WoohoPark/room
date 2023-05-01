@@ -3,7 +3,7 @@ package com.example.room.space.controller;
 import com.example.room.common.response.BasicResponse;
 import com.example.room.space.dto.RequestSpace;
 import com.example.room.space.dto.ResponseSpace;
-import com.example.room.space.service.SpaceService;
+import com.example.room.space.service.SpaceServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class SpaceController {
 
-    private final SpaceService spaceService;
+    private final SpaceServiceImpl spaceServiceImpl;
     //TODO 테스트코드 작성, 권한 적용
 
     @PostMapping
     @ApiOperation("공간_생성")
     public BasicResponse<ResponseSpace> create(@RequestBody RequestSpace requestSpace
     ) {
-        ResponseSpace response = spaceService.create(requestSpace);
+        ResponseSpace response = spaceServiceImpl.create(requestSpace);
         return BasicResponse.<ResponseSpace>builder()
             .data(response)
             .build();
@@ -33,7 +33,7 @@ public class SpaceController {
     @ApiOperation("공간_전체조회")
     public BasicResponse<List<ResponseSpace>> findAll(
         @PageableDefault(size = 20, sort = "id") Pageable pageable) {
-        List<ResponseSpace> response = spaceService.findAll(pageable);
+        List<ResponseSpace> response = spaceServiceImpl.findAll(pageable);
         return BasicResponse.<List<ResponseSpace>>builder().data(response).build();
     }
 
@@ -41,14 +41,14 @@ public class SpaceController {
     @ApiOperation("공간_세부조회")
     public BasicResponse<ResponseSpace> findBySpaceId(
         @PathVariable(name = "spaceId") Long id) {
-        ResponseSpace response = spaceService.findBySpaceId(id);
+        ResponseSpace response = spaceServiceImpl.findBySpaceId(id);
         return BasicResponse.<ResponseSpace>builder().data(response).build();
     }
 
     @DeleteMapping("/{spaceId}")
     @ApiOperation("공간_삭제")
     public BasicResponse remove(@PathVariable(name = "spaceId") Long id) {
-        spaceService.deleteBySpaceId(id);
+        spaceServiceImpl.deleteBySpaceId(id);
         return BasicResponse.builder().build();
     }
 
@@ -56,7 +56,7 @@ public class SpaceController {
     @ApiOperation("공간_수정")
     public BasicResponse<ResponseSpace> update(@RequestBody RequestSpace requestSpace
     ) {
-        ResponseSpace response = spaceService.update(requestSpace);
+        ResponseSpace response = spaceServiceImpl.update(requestSpace);
         return BasicResponse.<ResponseSpace>builder()
             .data(response)
             .build();

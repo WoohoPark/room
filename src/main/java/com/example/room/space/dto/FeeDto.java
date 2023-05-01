@@ -3,7 +3,7 @@ package com.example.room.space.dto;
 import com.example.room.common.constants.FeeTypeStatus;
 import com.example.room.common.constants.MorningAfternoonStatus;
 import com.example.room.common.constants.PackageStatus;
-import com.example.room.space.entity.fee.Fee;
+import com.example.room.space.entity.Fee;
 import lombok.Builder;
 import lombok.Getter;
 

@@ -1,4 +1,4 @@
-package com.example.room.space.entity.facility;
+package com.example.room.space.entity;
 
 import com.example.room.space.dto.FacilityDto;
 import javax.persistence.*;

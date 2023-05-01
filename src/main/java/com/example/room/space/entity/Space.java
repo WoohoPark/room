@@ -1,15 +1,11 @@
-package com.example.room.space.entity.space;
+package com.example.room.space.entity;
 
 import com.example.room.common.constants.LocationStatus;
 import com.example.room.common.constants.SpaceTypeStatus;
-import com.example.room.space.dto.RequestSpace;
-import com.example.room.space.dto.ResponseSpace;
-import com.example.room.space.entity.fee.Fee;
 import com.example.room.user.entity.Host;
-import com.example.room.reservation.entity.reservation.Reservation;
+import com.example.room.reservation.entity.Reservation;
 import com.example.room.review.entity.Review;
-import com.example.room.space.entity.facility.Facility;
-import com.example.room.space.entity.rental.Rental;
+import com.example.room.user.entity.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -81,9 +77,11 @@ public class Space {
     @JoinColumn(name = "FEE_ID")
     private Fee fee;
 
-    @ManyToOne
-    @JoinColumn(name = "HOST_ID")
-    Host host;
+    @ManyToOne(
+        cascade = CascadeType.ALL
+    )
+    @JoinColumn(name = "USER_NO")
+    User user;
 
     @OneToMany(mappedBy = "space")
     List<Review> reviews;
@@ -104,7 +102,7 @@ public class Space {
     @Builder
     public Space(long id, boolean withDog, int peopleCount, String name, LocationStatus location,
         BigDecimal latitude, BigDecimal longitude, Date createDate, Date updateDate, Rental rental,
-        Facility facility, Host host, List<Review> reviews, List<Reservation> reservations,
+        Facility facility, User user, List<Review> reviews, List<Reservation> reservations,
         SpaceTypeStatus spaceType,Fee fee) {
         this.id = id;
         this.withDog = withDog;
@@ -117,26 +115,10 @@ public class Space {
         this.updateDate = updateDate;
         this.rental = rental;
         this.facility = facility;
-        this.host = host;
+        this.user = user;
         this.spaceType = spaceType;
         this.reviews = reviews;
         this.reservations = reservations;
         this.fee =fee;
-    }
-
-    public ResponseSpace toDto() {
-        return ResponseSpace.builder()
-            .id(id)
-            .withDog(withDog)
-            .peopleCount(peopleCount)
-            .name(name)
-            .location(location)
-            .latitude(latitude)
-            .longitude(longitude)
-            .createDate(createDate)
-            .updateDate(updateDate)
-            .rentalDto(rental.toDto())
-            .facilityDto(facility.toDto())
-            .build();
     }
 }

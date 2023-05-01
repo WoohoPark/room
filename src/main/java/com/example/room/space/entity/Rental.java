@@ -1,4 +1,4 @@
-package com.example.room.space.entity.rental;
+package com.example.room.space.entity;
 
 import com.example.room.space.dto.RentalDto;
 import lombok.Builder;

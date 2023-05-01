@@ -10,7 +10,7 @@ import com.example.room.space.dto.FacilityDto;
 import com.example.room.space.dto.FeeDto;
 import com.example.room.space.dto.RentalDto;
 import com.example.room.space.dto.RequestSpace;
-import com.example.room.space.entity.space.Space;
+import com.example.room.space.entity.Space;
 import java.math.BigDecimal;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;

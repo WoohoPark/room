@@ -1,6 +1,6 @@
 package com.example.room.review.entity;
 
-import com.example.room.space.entity.space.Space;
+import com.example.room.space.entity.Space;
 import com.example.room.user.entity.Guest;
 
 import javax.persistence.*;

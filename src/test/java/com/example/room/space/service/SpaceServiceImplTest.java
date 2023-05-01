@@ -22,10 +22,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class SpaceServiceTest {
+class SpaceServiceImplTest {
 
     @InjectMocks
-    private SpaceService spaceService;
+    private SpaceServiceImpl spaceServiceImpl;
 
     @Mock
     private SpaceRepository spaceRepository;
@@ -51,7 +51,7 @@ class SpaceServiceTest {
 
         //when & stub
         when(spaceRepository.save(any())).thenReturn(expect.toEntity());
-        ResponseSpace actual = spaceService.create(expect);
+        ResponseSpace actual = spaceServiceImpl.create(expect);
 
         //then
         assertThat(actual.isWithDog()).isEqualTo(expect.isWithDog());
@@ -83,7 +83,7 @@ class SpaceServiceTest {
 
         //when & stub
 //        when(spaceRepository.deleteById(expect)).thenReturn("");
-        spaceService.deleteBySpaceId(expect);
+        spaceServiceImpl.deleteBySpaceId(expect);
 
 
     }

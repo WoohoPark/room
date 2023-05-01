@@ -1,6 +1,6 @@
 package com.example.room.user.entity;
 
-import com.example.room.space.entity.space.Space;
+import com.example.room.space.entity.Space;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -17,8 +17,7 @@ import java.util.List;
 @DiscriminatorValue("host")
 public class Host extends User {
 
-    @OneToMany(mappedBy = "host")
-    private List<Space> spaces;
+
 
     private int businessNumber;
 }

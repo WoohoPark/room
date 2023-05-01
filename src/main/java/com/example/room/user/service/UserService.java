@@ -25,7 +25,7 @@ public class UserService {
     }
 
     @Transactional
-    public ResponseUser update(RequestUser requestUser){
+    public ResponseUser update(RequestUser requestUser) {
         User user = userRepository.findByUserNo(requestUser.getUserNo()).orElseThrow(
             () -> new IllegalArgumentException("수정할 수 있는 사용자가 존재하지 않습니다.")
         );
@@ -43,5 +43,11 @@ public class UserService {
     @Transactional
     public void deleteByUserNo(Long userNo) {
         userRepository.deleteByUserNo(userNo);
+    }
+
+    public User findByUserNo(Long userNo) {
+        return userRepository.findByUserNo(userNo).orElseThrow(
+            () -> new IllegalArgumentException("존재하지 않는 사용자입니다.")
+        );
     }
 }

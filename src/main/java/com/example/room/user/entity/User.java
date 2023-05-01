@@ -3,6 +3,8 @@ package com.example.room.user.entity;
 import com.example.room.common.config.auth.constants.AuthRoleStatus;
 import com.example.room.common.constants.LocationStatus;
 import com.example.room.common.constants.SexualStatus;
+import com.example.room.reservation.entity.Reservation;
+import com.example.room.space.entity.Space;
 import com.example.room.user.dto.RequestUser;
 import com.example.room.user.dto.ResponseUser;
 import lombok.Builder;
@@ -62,6 +64,12 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10)
     private LocationStatus location;
+
+    @OneToMany(mappedBy = "user")
+    List<Reservation> reservations;
+
+    @OneToMany(mappedBy = "user")
+    private List<Space> spaces;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;

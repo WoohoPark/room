@@ -1,6 +1,6 @@
 package com.example.room.space.repository;
 
-import com.example.room.space.entity.space.Space;
+import com.example.room.space.entity.Space;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
